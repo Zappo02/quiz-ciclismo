@@ -2,668 +2,668 @@ import { useState, useEffect, useRef, useMemo } from "react";
 
 // ── DATABASE ────────────────────────────────────────────────────────────
 const DB = [
-  { name:"Ballerstedt Maurice", surname:"Maurice", team:"Alpecin-Premier Tech", nation:"Germania", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Bayer Tobias", surname:"Tobias", team:"Alpecin-Premier Tech", nation:"Austria", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Belmans Lennert", surname:"Lennert", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Busatto Francesco", surname:"Francesco", team:"Alpecin-Premier Tech", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"De Vylder Lindsay", surname:"Lindsay", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Debruyne Ramses", surname:"Ramses", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Dehairs Simon", surname:"Simon", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Del Grosso Tibor", surname:"Tibor", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Dillier Silvan", surname:"Silvan", team:"Alpecin-Premier Tech", nation:"Svizzera", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Dockx Aaron", surname:"Aaron", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Geens Jonas", surname:"Jonas", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Glivar Gal", surname:"Gal", team:"Alpecin-Premier Tech", nation:"Slovenia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Gogl Michael", surname:"Michael", team:"Alpecin-Premier Tech", nation:"Austria", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Groves Kaden", surname:"Kaden", team:"Alpecin-Premier Tech", nation:"Australia", continent:"Oceania", age:27, uciPts:1420, uciRank:51 },
-  { name:"Houle Hugo", surname:"Hugo", team:"Alpecin-Premier Tech", nation:"Canada", continent:"Nord America", age:35, uciPts:0, uciRank:0 },
-  { name:"Marsman Tim", surname:"Tim", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Philipsen Jasper", surname:"Jasper", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:28, uciPts:2438, uciRank:17 },
-  { name:"Planckaert Edward", surname:"Edward", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Plowright Jensen", surname:"Jensen", team:"Alpecin-Premier Tech", nation:"Australia", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
-  { name:"Price-Pejtersen Johan", surname:"Johan", team:"Alpecin-Premier Tech", nation:"Danimarca", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Remijn Senna", surname:"Senna", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Rickaert Jonas", surname:"Jonas", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Riesebeek Oscar", surname:"Oscar", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Sénéchal Florian", surname:"Florian", team:"Alpecin-Premier Tech", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Sentjens Sente", surname:"Sente", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Thijssen Gerben", surname:"Gerben", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Uhlig Henri", surname:"Henri", team:"Alpecin-Premier Tech", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"van der Poel Mathieu", surname:"Mathieu", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:31, uciPts:3838, uciRank:8 },
-  { name:"Vergallito Luca", surname:"Luca", team:"Alpecin-Premier Tech", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Verstrynge Emiel", surname:"Emiel", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Arndt Nikias", surname:"Nikias", team:"Bahrain Victorious", nation:"Germania", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Bauhaus Phil", surname:"Phil", team:"Bahrain Victorious", nation:"Germania", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Bilbao Pello", surname:"Pello", team:"Bahrain Victorious", nation:"Spagna", continent:"Europa", age:36, uciPts:1078, uciRank:74 },
-  { name:"Borgo Alessandro", surname:"Alessandro", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Bruttomesso Alberto", surname:"Alberto", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Buitrago Santiago", surname:"Santiago", team:"Bahrain Victorious", nation:"Colombia", continent:"Sud America", age:26, uciPts:1077, uciRank:75 },
-  { name:"Caruso Damiano", surname:"Damiano", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:38, uciPts:871, uciRank:95 },
-  { name:"Ermakov Roman", surname:"Roman", team:"Bahrain Victorious", nation:"Russia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Erzen Zak", surname:"Zak", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Eulalio Afonso", surname:"Afonso", team:"Bahrain Victorious", nation:"Portogallo", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Govekar Matevz", surname:"Matevz", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Gradek Kamil", surname:"Kamil", team:"Bahrain Victorious", nation:"Polonia", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Kepplinger Rainer", surname:"Rainer", team:"Bahrain Victorious", nation:"Austria", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Martinez Lenny", surname:"Lenny", team:"Bahrain Victorious", nation:"Francia", continent:"Europa", age:22, uciPts:1873, uciRank:31 },
-  { name:"Miholjevic Fran", surname:"Fran", team:"Bahrain Victorious", nation:"Croazia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Miquel Delgado Pau", surname:"Pau", team:"Bahrain Victorious", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Mohoric Matej", surname:"Matej", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Omrzel Jakob", surname:"Jakob", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Paasschens Mathijs", surname:"Mathijs", team:"Bahrain Victorious", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Segaert Alec", surname:"Alec", team:"Bahrain Victorious", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Skerl Daniel", surname:"Daniel", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Stannard Robert", surname:"Robert", team:"Bahrain Victorious", nation:"Australia", continent:"Oceania", age:27, uciPts:0, uciRank:0 },
-  { name:"Stockwell Oliver", surname:"Oliver", team:"Bahrain Victorious", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Tiberi Antonio", surname:"Antonio", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:24, uciPts:1109, uciRank:69 },
-  { name:"Valter Attila", surname:"Attila", team:"Bahrain Victorious", nation:"Ungheria", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"van der Meulen Max", surname:"Max", team:"Bahrain Victorious", nation:"Olanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Van Mechelen Vlad", surname:"Vlad", team:"Bahrain Victorious", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Zambanini Edoardo", surname:"Edoardo", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Benoot Tiesj", surname:"Tiesj", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:32, uciPts:1295, uciRank:54 },
-  { name:"Bisiaux Léo", surname:"Léo", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Bissegger Stefan", surname:"Stefan", team:"Decathlon CMA CGM Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Bol Cees", surname:"Cees", team:"Decathlon CMA CGM Team", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Chamberlain Oscar", surname:"Oscar", team:"Decathlon CMA CGM Team", nation:"Australia", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
-  { name:"De Pestel Sander", surname:"Sander", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Dewulf Stan", surname:"Stan", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Gall Felix", surname:"Felix", team:"Decathlon CMA CGM Team", nation:"Austria", continent:"Europa", age:28, uciPts:2216, uciRank:22 },
-  { name:"Gautherat Pierre", surname:"Pierre", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Ghys Robbe", surname:"Robbe", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Gudmestad Tord", surname:"Tord", team:"Decathlon CMA CGM Team", nation:"Norvegia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Hoole Daan", surname:"Daan", team:"Decathlon CMA CGM Team", nation:"Olanda", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Isidore Noa", surname:"Noa", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Kooij Olav", surname:"Olav", team:"Decathlon CMA CGM Team", nation:"Olanda", continent:"Europa", age:24, uciPts:2123, uciRank:26 },
-  { name:"L'Hote Antoine", surname:"Antoine", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Labrosse Jordan", surname:"Jordan", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Lapeira Paul", surname:"Paul", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Lund Andresen Tobias", surname:"Tobias", team:"Decathlon CMA CGM Team", nation:"Danimarca", continent:"Europa", age:23, uciPts:1252, uciRank:57 },
-  { name:"Mühlberger Gregor", surname:"Gregor", team:"Decathlon CMA CGM Team", nation:"Austria", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Naesen Oliver", surname:"Oliver", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Paret-Peintre Aurélien", surname:"Aurélien", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Pedersen Rasmus Søjberg", surname:"Søjberg", team:"Decathlon CMA CGM Team", nation:"Danimarca", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Pollefliet Gianluca", surname:"Gianluca", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Prodhomme Nicolas", surname:"Nicolas", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:29, uciPts:1108, uciRank:70 },
-  { name:"Riccitello Matthew", surname:"Matthew", team:"Decathlon CMA CGM Team", nation:"USA", continent:"Nord America", age:24, uciPts:1019, uciRank:78 },
-  { name:"Scotson Callum", surname:"Callum", team:"Decathlon CMA CGM Team", nation:"Australia", continent:"Oceania", age:29, uciPts:0, uciRank:0 },
-  { name:"Seixas Paul", surname:"Paul", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:19, uciPts:1128, uciRank:67 },
-  { name:"Staune-Mittet Johannes", surname:"Johannes", team:"Decathlon CMA CGM Team", nation:"Norvegia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Agostinacchio Mattia", surname:"Mattia", team:"EF Education-EasyPost", nation:"Italia", continent:"Europa", age:18, uciPts:0, uciRank:0 },
-  { name:"Albanese Vincenzo", surname:"Vincenzo", team:"EF Education-EasyPost", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Asgreen Kasper", surname:"Kasper", team:"EF Education-EasyPost", nation:"Danimarca", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Battistella Samuele", surname:"Samuele", team:"EF Education-EasyPost", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Baudin Alex", surname:"Alex", team:"EF Education-EasyPost", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Beloki Markel", surname:"Markel", team:"EF Education-EasyPost", nation:"Spagna", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Carapaz Richard", surname:"Richard", team:"EF Education-EasyPost", nation:"Ecuador", continent:"Sud America", age:32, uciPts:1807, uciRank:33 },
-  { name:"Cepeda Alexander", surname:"Alexander", team:"EF Education-EasyPost", nation:"Ecuador", continent:"Sud America", age:27, uciPts:0, uciRank:0 },
-  { name:"Healy Ben", surname:"Ben", team:"EF Education-EasyPost", nation:"Irlanda", continent:"Europa", age:25, uciPts:2742, uciRank:13 },
-  { name:"Hobbs Noah", surname:"Noah", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Honore Mikkel", surname:"Mikkel", team:"EF Education-EasyPost", nation:"Danimarca", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Lamperti Luke", surname:"Luke", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:23, uciPts:0, uciRank:0 },
-  { name:"Leonard Michael", surname:"Michael", team:"EF Education-EasyPost", nation:"Canada", continent:"Nord America", age:22, uciPts:0, uciRank:0 },
-  { name:"Mackellar Alastair", surname:"Alastair", team:"EF Education-EasyPost", nation:"Australia", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
-  { name:"Mihkels Madis", surname:"Madis", team:"EF Education-EasyPost", nation:"Estonia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Nerurkar Lukas", surname:"Lukas", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Powless Neilson", surname:"Neilson", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:29, uciPts:1610, uciRank:39 },
-  { name:"Quinn Sean", surname:"Sean", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:25, uciPts:0, uciRank:0 },
-  { name:"Rafferty Darren", surname:"Darren", team:"EF Education-EasyPost", nation:"Irlanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Ryan Archie", surname:"Archie", team:"EF Education-EasyPost", nation:"Irlanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Schwarzbacher Matthias", surname:"Matthias", team:"EF Education-EasyPost", nation:"Slovacchia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Shaw James", surname:"James", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Simmons Colby", surname:"Colby", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:22, uciPts:0, uciRank:0 },
-  { name:"Steinhauser Georg", surname:"Georg", team:"EF Education-EasyPost", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Sweeny Harry", surname:"Harry", team:"EF Education-EasyPost", nation:"Australia", continent:"Oceania", age:27, uciPts:0, uciRank:0 },
-  { name:"Valgren Michael", surname:"Michael", team:"EF Education-EasyPost", nation:"Danimarca", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"van den Berg Marijn", surname:"Marijn", team:"EF Education-EasyPost", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Van Der Lee Jardi", surname:"Jardi", team:"EF Education-EasyPost", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Walker Max", surname:"Max", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Barthe Cyril", surname:"Cyril", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Berthet Clément", surname:"Clément", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Bower Lewis", surname:"Lewis", team:"Groupama-FDJ United", nation:"Nuova Zelanda", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
-  { name:"Braz Afonso Clément", surname:"Clément", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Cavagna Remi", surname:"Remi", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Costiou Ewen", surname:"Ewen", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Decomble Maxime", surname:"Maxime", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Donnenwirth Tom", surname:"Tom", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Fontaine Titouan", surname:"Titouan", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Gaudu David", surname:"David", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Geniets Kevin", surname:"Kevin", team:"Groupama-FDJ United", nation:"Lussemburgo", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Germani Lorenzo", surname:"Lorenzo", team:"Groupama-FDJ United", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Grégoire Romain", surname:"Romain", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:23, uciPts:1790, uciRank:34 },
-  { name:"Gruel Thibaud", surname:"Thibaud", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Huens Axel", surname:"Axel", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Jacobs Johan", surname:"Johan", team:"Groupama-FDJ United", nation:"Svizzera", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Kench Josh", surname:"Josh", team:"Groupama-FDJ United", nation:"Nuova Zelanda", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
-  { name:"Le Gac Olivier", surname:"Olivier", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Madouas Valentin", surname:"Valentin", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Martin-Guyonnet Guillaume", surname:"Guillaume", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Milan Matteo", surname:"Matteo", team:"Groupama-FDJ United", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Molard Rudy", surname:"Rudy", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:36, uciPts:0, uciRank:0 },
-  { name:"Pacher Quentin", surname:"Quentin", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Paleni Enzo", surname:"Enzo", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Penhoët Paul", surname:"Paul", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Rochas Rémy", surname:"Rémy", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Rolland Brieuc", surname:"Brieuc", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Russo Clément", surname:"Clément", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Tronchon Bastien", surname:"Bastien", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Arensman Thymen", surname:"Thymen", team:"INEOS Grenadiers", nation:"Olanda", continent:"Europa", age:26, uciPts:1548, uciRank:41 },
-  { name:"August AJ", surname:"AJ", team:"INEOS Grenadiers", nation:"USA", continent:"Nord America", age:20, uciPts:0, uciRank:0 },
-  { name:"Bernal Egan", surname:"Egan", team:"INEOS Grenadiers", nation:"Colombia", continent:"Sud America", age:29, uciPts:1742, uciRank:36 },
-  { name:"De Plus Laurens", surname:"Laurens", team:"INEOS Grenadiers", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Foss Tobias", surname:"Tobias", team:"INEOS Grenadiers", nation:"Norvegia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Ganna Filippo", surname:"Filippo", team:"INEOS Grenadiers", nation:"Italia", continent:"Europa", age:29, uciPts:2152, uciRank:24 },
-  { name:"Godon Dorian", surname:"Dorian", team:"INEOS Grenadiers", nation:"Francia", continent:"Europa", age:29, uciPts:1069, uciRank:76 },
-  { name:"Haig Jack", surname:"Jack", team:"INEOS Grenadiers", nation:"Australia", continent:"Oceania", age:32, uciPts:0, uciRank:0 },
-  { name:"Hamilton Lucas", surname:"Lucas", team:"INEOS Grenadiers", nation:"Australia", continent:"Oceania", age:30, uciPts:0, uciRank:0 },
-  { name:"Heiduk Kim", surname:"Kim", team:"INEOS Grenadiers", nation:"Germania", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Jungels Bob", surname:"Bob", team:"INEOS Grenadiers", nation:"Lussemburgo", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Kwiatkowski Michal", surname:"Michal", team:"INEOS Grenadiers", nation:"Polonia", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Langellotti Victor", surname:"Victor", team:"INEOS Grenadiers", nation:"Monaco", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Laurance Axel", surname:"Axel", team:"INEOS Grenadiers", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Onley Oscar", surname:"Oscar", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:23, uciPts:2910, uciRank:9 },
-  { name:"Rivera Brandon", surname:"Brandon", team:"INEOS Grenadiers", nation:"Colombia", continent:"Sud America", age:30, uciPts:0, uciRank:0 },
-  { name:"Rodriguez Carlos", surname:"Carlos", team:"INEOS Grenadiers", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Rodríguez Óscar", surname:"Óscar", team:"INEOS Grenadiers", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Sheffield Magnus", surname:"Magnus", team:"INEOS Grenadiers", nation:"USA", continent:"Nord America", age:23, uciPts:904, uciRank:92 },
-  { name:"Shmidt Artem", surname:"Artem", team:"INEOS Grenadiers", nation:"USA", continent:"Nord America", age:22, uciPts:0, uciRank:0 },
-  { name:"Svestad-Bårdseng Embret", surname:"Embret", team:"INEOS Grenadiers", nation:"Norvegia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Swift Ben", surname:"Ben", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:38, uciPts:0, uciRank:0 },
-  { name:"Swift Connor", surname:"Connor", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Tarling Joshua", surname:"Joshua", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Turner Ben", surname:"Ben", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Vauquelin Kévin", surname:"Kévin", team:"INEOS Grenadiers", nation:"Francia", continent:"Europa", age:24, uciPts:2459, uciRank:16 },
-  { name:"Watson Sam", surname:"Sam", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:24, uciPts:894, uciRank:93 },
-  { name:"Welsford Sam", surname:"Sam", team:"INEOS Grenadiers", nation:"Australia", continent:"Oceania", age:30, uciPts:0, uciRank:0 },
-  { name:"Øxenberg Peter", surname:"Peter", team:"INEOS Grenadiers", nation:"Danimarca", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Ayuso Juan", surname:"Juan", team:"Lidl-Trek", nation:"Spagna", continent:"Europa", age:23, uciPts:2602, uciRank:14 },
-  { name:"Bagioli Andrea", surname:"Andrea", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:27, uciPts:917, uciRank:90 },
-  { name:"Bernard Julien", surname:"Julien", team:"Lidl-Trek", nation:"Francia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Ciccone Giulio", surname:"Giulio", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:31, uciPts:2752, uciRank:12 },
-  { name:"Consonni Simone", surname:"Simone", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Gee-West Derek", surname:"Derek", team:"Lidl-Trek", nation:"Canada", continent:"Nord America", age:28, uciPts:1620, uciRank:38 },
-  { name:"Geoghegan Hart Tao", surname:"Tao", team:"Lidl-Trek", nation:"Regno Unito", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Ghebreigzabhier Amanuel", surname:"Amanuel", team:"Lidl-Trek", nation:"Eritrea", continent:"Africa", age:31, uciPts:0, uciRank:0 },
-  { name:"Konrad Patrick", surname:"Patrick", team:"Lidl-Trek", nation:"Austria", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Kragh Andersen Søren", surname:"Søren", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Kämna Lennard", surname:"Lennard", team:"Lidl-Trek", nation:"Germania", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Milan Jonathan", surname:"Jonathan", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:25, uciPts:2144, uciRank:25 },
-  { name:"Mollema Bauke", surname:"Bauke", team:"Lidl-Trek", nation:"Olanda", continent:"Europa", age:39, uciPts:0, uciRank:0 },
-  { name:"Mosca Jacopo", surname:"Jacopo", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Norsgaard Mathias Sunekær", surname:"Sunekær", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Nys Thibau", surname:"Thibau", team:"Lidl-Trek", nation:"Belgio", continent:"Europa", age:23, uciPts:846, uciRank:98 },
-  { name:"Oomen Sam", surname:"Sam", team:"Lidl-Trek", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Pedersen Mads", surname:"Mads", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:30, uciPts:5074, uciRank:4 },
-  { name:"Simmons Quinn", surname:"Quinn", team:"Lidl-Trek", nation:"USA", continent:"Nord America", age:24, uciPts:1280, uciRank:55 },
-  { name:"Skjelmose Mattias", surname:"Mattias", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:25, uciPts:2254, uciRank:21 },
-  { name:"Skujins Toms", surname:"Toms", team:"Lidl-Trek", nation:"Lettonia", continent:"Europa", age:34, uciPts:1091, uciRank:72 },
-  { name:"Sobrero Matteo", surname:"Matteo", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Söderqvist Jakob", surname:"Jakob", team:"Lidl-Trek", nation:"Svezia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Teutenberg Tim Torn", surname:"Torn", team:"Lidl-Trek", nation:"Germania", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Theuns Edward", surname:"Edward", team:"Lidl-Trek", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Vacek Mathias", surname:"Mathias", team:"Lidl-Trek", nation:"Rep. Ceca", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Vergaerde Otto", surname:"Otto", team:"Lidl-Trek", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Verona Carlos", surname:"Carlos", team:"Lidl-Trek", nation:"Spagna", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Walscheid Max", surname:"Max", team:"Lidl-Trek", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Withen Philipsen Albert", surname:"Albert", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:19, uciPts:0, uciRank:0 },
-  { name:"Aerts Toon", surname:"Toon", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Artz Huub", surname:"Huub", team:"Lotto-Intermarché", nation:"Olanda", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Berckmoes Jenno", surname:"Jenno", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Beullens Cédric", surname:"Cédric", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Braet Vito", surname:"Vito", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Craps Lars", surname:"Lars", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"De Buyst Jasper", surname:"Jasper", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"De Lie Arnaud", surname:"Arnaud", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:2781, uciRank:11 },
-  { name:"De Schuyteneer Steffen", surname:"Steffen", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Fox Matthew", surname:"Matthew", team:"Lotto-Intermarché", nation:"Australia", continent:"Oceania", age:23, uciPts:0, uciRank:0 },
-  { name:"Giddings Joshua", surname:"Joshua", team:"Lotto-Intermarché", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Grignard Sébastien", surname:"Sébastien", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Grisel Matys", surname:"Matys", team:"Lotto-Intermarché", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Gualdi Simone", surname:"Simone", team:"Lotto-Intermarché", nation:"Italia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Kockelmann Mathieu", surname:"Mathieu", team:"Lotto-Intermarché", nation:"Lussemburgo", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Menten Milan", surname:"Milan", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Orins Robin", surname:"Robin", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Rota Lorenzo", surname:"Lorenzo", team:"Lotto-Intermarché", nation:"Italia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Rutsch Jonas", surname:"Jonas", team:"Lotto-Intermarché", nation:"Germania", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Slock Liam", surname:"Liam", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Taminiaux Lionel", surname:"Lionel", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Thompson Reuben", surname:"Reuben", team:"Lotto-Intermarché", nation:"Nuova Zelanda", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
-  { name:"Van Boven Luca", surname:"Luca", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"van der Hoorn Taco", surname:"Taco", team:"Lotto-Intermarché", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Van Eetvelt Lennert", surname:"Lennert", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"van Sintmaartensdijk Roel", surname:"Roel", team:"Lotto-Intermarché", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Veistroffer Baptiste", surname:"Baptiste", team:"Lotto-Intermarché", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Widar Jarno", surname:"Jarno", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Zimmermann Georg", surname:"Georg", team:"Lotto-Intermarché", nation:"Germania", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Ørn-Kristoff Felix", surname:"Felix", team:"Lotto-Intermarché", nation:"Norvegia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Adrià Roger", surname:"Roger", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Arcas Jorge", surname:"Jorge", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Aular Orluis", surname:"Orluis", team:"Movistar Team", nation:"Venezuela", continent:"Sud America", age:29, uciPts:1155, uciRank:65 },
-  { name:"Barrenetxea Jon", surname:"Jon", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Canal Carlos", surname:"Carlos", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Castrillo Pablo", surname:"Pablo", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Cepeda Jefferson", surname:"Jefferson", team:"Movistar Team", nation:"Ecuador", continent:"Sud America", age:30, uciPts:0, uciRank:0 },
-  { name:"Formolo Davide", surname:"Davide", team:"Movistar Team", nation:"Italia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"García Raúl", surname:"Raúl", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"García Cortina Iván", surname:"Iván", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Heßmann Michel", surname:"Michel", team:"Movistar Team", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Lopez Juan Pedro", surname:"Pedro", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Maciejuk Filip", surname:"Filip", team:"Movistar Team", nation:"Polonia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Mas Enric", surname:"Enric", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:31, uciPts:1021, uciRank:77 },
-  { name:"Milesi Lorenzo", surname:"Lorenzo", team:"Movistar Team", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Moro Manlio", surname:"Manlio", team:"Movistar Team", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Novak Pavel", surname:"Pavel", team:"Movistar Team", nation:"Rep. Ceca", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Oliveira Nelson", surname:"Nelson", team:"Movistar Team", nation:"Portogallo", continent:"Europa", age:37, uciPts:0, uciRank:0 },
-  { name:"Pescador Diego", surname:"Diego", team:"Movistar Team", nation:"Colombia", continent:"Sud America", age:21, uciPts:0, uciRank:0 },
-  { name:"Quintana Nairo", surname:"Nairo", team:"Movistar Team", nation:"Colombia", continent:"Sud America", age:36, uciPts:0, uciRank:0 },
-  { name:"Romeo Iván", surname:"Iván", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Romo Javier", surname:"Javier", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:27, uciPts:1089, uciRank:73 },
-  { name:"Rubio Einer", surname:"Einer", team:"Movistar Team", nation:"Colombia", continent:"Sud America", age:28, uciPts:0, uciRank:0 },
-  { name:"Sanchez Pelayo", surname:"Pelayo", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Serrano Gonzalo", surname:"Gonzalo", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Tesfazion Natnael", surname:"Natnael", team:"Movistar Team", nation:"Eritrea", continent:"Africa", age:26, uciPts:0, uciRank:0 },
-  { name:"Torres Albert", surname:"Albert", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Uijtdebroeks Cian", surname:"Cian", team:"Movistar Team", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Askey Lewis", surname:"Lewis", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Bennett George", surname:"George", team:"NS CYCLING TEAM", nation:"Nuova Zelanda", continent:"Oceania", age:35, uciPts:0, uciRank:0 },
-  { name:"Blackmore Joe", surname:"Joe", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Boivin Guillaume", surname:"Guillaume", team:"NS CYCLING TEAM", nation:"Canada", continent:"Nord America", age:36, uciPts:0, uciRank:0 },
-  { name:"Côté Pier-André", surname:"Pier-André", team:"NS CYCLING TEAM", nation:"Canada", continent:"Nord America", age:28, uciPts:0, uciRank:0 },
-  { name:"Einhorn Itamar", surname:"Itamar", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Frigo Marco", surname:"Marco", team:"NS CYCLING TEAM", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Gilmore Brady", surname:"Brady", team:"NS CYCLING TEAM", nation:"Australia", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
-  { name:"Girmay Biniam", surname:"Biniam", team:"NS CYCLING TEAM", nation:"Eritrea", continent:"Africa", age:25, uciPts:1646, uciRank:37 },
-  { name:"Hirt Jan", surname:"Jan", team:"NS CYCLING TEAM", nation:"Rep. Ceca", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Hofstetter Hugo", surname:"Hugo", team:"NS CYCLING TEAM", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Kogut Oded", surname:"Oded", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Louvel Matis", surname:"Matis", team:"NS CYCLING TEAM", nation:"Francia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Lutsenko Alexey", surname:"Alexey", team:"NS CYCLING TEAM", nation:"Kazakistan", continent:"Asia", age:33, uciPts:0, uciRank:0 },
-  { name:"Martí Pau", surname:"Pau", team:"NS CYCLING TEAM", nation:"Spagna", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Mullen Ryan", surname:"Ryan", team:"NS CYCLING TEAM", nation:"Irlanda", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Neilands Krists", surname:"Krists", team:"NS CYCLING TEAM", nation:"Lettonia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Pinarello Alessandro", surname:"Alessandro", team:"NS CYCLING TEAM", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Raisberg Nadav", surname:"Nadav", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Schultz Nick", surname:"Nick", team:"NS CYCLING TEAM", nation:"Australia", continent:"Oceania", age:31, uciPts:0, uciRank:0 },
-  { name:"Sheehan Riley", surname:"Riley", team:"NS CYCLING TEAM", nation:"USA", continent:"Nord America", age:25, uciPts:0, uciRank:0 },
-  { name:"Smith Dion", surname:"Dion", team:"NS CYCLING TEAM", nation:"Nuova Zelanda", continent:"Oceania", age:33, uciPts:0, uciRank:0 },
-  { name:"Stewart Jake", surname:"Jake", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Strong Corbin", surname:"Corbin", team:"NS CYCLING TEAM", nation:"Nuova Zelanda", continent:"Oceania", age:25, uciPts:1450, uciRank:47 },
-  { name:"Tene Rotem", surname:"Rotem", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Van Asbroeck Tom", surname:"Tom", team:"NS CYCLING TEAM", nation:"Belgio", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Van Tricht Floris", surname:"Floris", team:"NS CYCLING TEAM", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Vernon Ethan", surname:"Ethan", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Williams Stephen", surname:"Stephen", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Aleotti Giovanni", surname:"Giovanni", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Boichis Adrien", surname:"Adrien", team:"Red Bull-BORA-hansgrohe", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Cattaneo Mattia", surname:"Mattia", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Denz Nico", surname:"Nico", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Drizners Jarrad", surname:"Jarrad", team:"Red Bull-BORA-hansgrohe", nation:"Australia", continent:"Oceania", age:26, uciPts:0, uciRank:0 },
-  { name:"Etxeberria Haimar", surname:"Haimar", team:"Red Bull-BORA-hansgrohe", nation:"Spagna", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Evenepoel Remco", surname:"Remco", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:26, uciPts:4118, uciRank:6 },
-  { name:"Fisher-Black Finn", surname:"Finn", team:"Red Bull-BORA-hansgrohe", nation:"Nuova Zelanda", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
-  { name:"Hajek Alexander", surname:"Alexander", team:"Red Bull-BORA-hansgrohe", nation:"Austria", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Herzog Emil", surname:"Emil", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Hindley Jai", surname:"Jai", team:"Red Bull-BORA-hansgrohe", nation:"Australia", continent:"Oceania", age:29, uciPts:1540, uciRank:42 },
-  { name:"Lipowitz Florian", surname:"Florian", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:25, uciPts:2552, uciRank:15 },
-  { name:"Marit Arne", surname:"Arne", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Martinez Daniel", surname:"Daniel", team:"Red Bull-BORA-hansgrohe", nation:"Colombia", continent:"Sud America", age:29, uciPts:0, uciRank:0 },
-  { name:"Meeus Jordi", surname:"Jordi", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:27, uciPts:1235, uciRank:59 },
-  { name:"Moscon Gianni", surname:"Gianni", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Pellizzari Giulio", surname:"Giulio", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:22, uciPts:1473, uciRank:45 },
-  { name:"Pithie Laurence", surname:"Laurence", team:"Red Bull-BORA-hansgrohe", nation:"Nuova Zelanda", continent:"Oceania", age:23, uciPts:0, uciRank:0 },
-  { name:"Roglic Primoz", surname:"Primoz", team:"Red Bull-BORA-hansgrohe", nation:"Slovenia", continent:"Europa", age:36, uciPts:1856, uciRank:32 },
-  { name:"Thornley Callum", surname:"Callum", team:"Red Bull-BORA-hansgrohe", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Tratnik Jan", surname:"Jan", team:"Red Bull-BORA-hansgrohe", nation:"Slovenia", continent:"Europa", age:36, uciPts:0, uciRank:0 },
-  { name:"Tuckwell Luke", surname:"Luke", team:"Red Bull-BORA-hansgrohe", nation:"Australia", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
-  { name:"van Dijke Mick", surname:"Mick", team:"Red Bull-BORA-hansgrohe", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"van Dijke Tim", surname:"Tim", team:"Red Bull-BORA-hansgrohe", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Van Gils Maxim", surname:"Maxim", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"van Poppel Danny", surname:"Danny", team:"Red Bull-BORA-hansgrohe", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Vermeersch Gianni", surname:"Gianni", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Vlasov Aleksandr", surname:"Aleksandr", team:"Red Bull-BORA-hansgrohe", nation:"Russia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Wandahl Frederik", surname:"Frederik", team:"Red Bull-BORA-hansgrohe", nation:"Danimarca", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Zwiehoff Ben", surname:"Ben", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Bastiaens Ayco", surname:"Ayco", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Cras Steff", surname:"Steff", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Dainese Alberto", surname:"Alberto", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Eenkhoorn Pascal", surname:"Pascal", team:"Soudal Quick-Step", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Garofoli Gianmarco", surname:"Gianmarco", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Gelders Gil", surname:"Gil", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Hayter Ethan", surname:"Ethan", team:"Soudal Quick-Step", nation:"Regno Unito", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Lampaert Yves", surname:"Yves", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Landa Mikel", surname:"Mikel", team:"Soudal Quick-Step", nation:"Spagna", continent:"Europa", age:36, uciPts:0, uciRank:0 },
-  { name:"Lecerf Junior", surname:"Junior", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Magnier Paul", surname:"Paul", team:"Soudal Quick-Step", nation:"Francia", continent:"Europa", age:21, uciPts:2327, uciRank:19 },
-  { name:"Merlier Tim", surname:"Tim", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:33, uciPts:1951, uciRank:30 },
-  { name:"Paret-Peintre Valentin", surname:"Valentin", team:"Soudal Quick-Step", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Pedersen Casper", surname:"Casper", team:"Soudal Quick-Step", nation:"Danimarca", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Raccagni Noviero Andrea", surname:"Andrea", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Reinderink Pepijn", surname:"Pepijn", team:"Soudal Quick-Step", nation:"Olanda", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Rex Laurenz", surname:"Laurenz", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Schachmann Max", surname:"Max", team:"Soudal Quick-Step", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Stuyven Jasper", surname:"Jasper", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Svrcek Martin", surname:"Martin", team:"Soudal Quick-Step", nation:"Slovacchia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"van Baarle Dylan", surname:"Dylan", team:"Soudal Quick-Step", nation:"Olanda", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Van den Bossche Fabio", surname:"Fabio", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"van Gestel Dries", surname:"Dries", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Van Lerberghe Bert", surname:"Bert", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Van Wilder Ilan", surname:"Ilan", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:25, uciPts:947, uciRank:88 },
-  { name:"Vangheluwe Warre", surname:"Warre", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Vansevenant Mauri", surname:"Mauri", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Vervaeke Louis", surname:"Louis", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Vervenne Jonathan", surname:"Jonathan", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Zana Filippo", surname:"Filippo", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Ackermann Pascal", surname:"Pascal", team:"Team Jayco-AlUla", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Bouwman Koen", surname:"Koen", team:"Team Jayco-AlUla", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Capiot Amaury", surname:"Amaury", team:"Team Jayco-AlUla", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Conca Filippo", surname:"Filippo", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Covi Alessandro", surname:"Alessandro", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"De Bondt Dries", surname:"Dries", team:"Team Jayco-AlUla", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"De Pooter Dries", surname:"Dries", team:"Team Jayco-AlUla", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"De Pretto Davide", surname:"Davide", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Donaldson Robert", surname:"Robert", team:"Team Jayco-AlUla", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Double Paul", surname:"Paul", team:"Team Jayco-AlUla", nation:"Regno Unito", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Durbridge Luke", surname:"Luke", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:34, uciPts:0, uciRank:0 },
-  { name:"Engelhardt Felix", surname:"Felix", team:"Team Jayco-AlUla", nation:"Germania", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Foldager Anders", surname:"Anders", team:"Team Jayco-AlUla", nation:"Danimarca", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Gamper Patrick", surname:"Patrick", team:"Team Jayco-AlUla", nation:"Austria", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Hatherly Alan", surname:"Alan", team:"Team Jayco-AlUla", nation:"Sudafrica", continent:"Africa", age:30, uciPts:0, uciRank:0 },
-  { name:"Hellemose Asbjørn", surname:"Asbjørn", team:"Team Jayco-AlUla", nation:"Danimarca", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Juul-Jensen Christopher", surname:"Christopher", team:"Team Jayco-AlUla", nation:"Danimarca", continent:"Europa", age:36, uciPts:0, uciRank:0 },
-  { name:"Krijnsen Jelte", surname:"Jelte", team:"Team Jayco-AlUla", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Matthews Michael", surname:"Michael", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:35, uciPts:1780, uciRank:35 },
-  { name:"McKenzie Hamish", surname:"Hamish", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
-  { name:"Mezgec Luka", surname:"Luka", team:"Team Jayco-AlUla", nation:"Slovenia", continent:"Europa", age:37, uciPts:0, uciRank:0 },
-  { name:"O'Brien Kelland", surname:"Kelland", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:27, uciPts:0, uciRank:0 },
-  { name:"O'Connor Ben", surname:"Ben", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:30, uciPts:944, uciRank:89 },
-  { name:"Pickering Finlay", surname:"Finlay", team:"Team Jayco-AlUla", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Plapp Luke", surname:"Luke", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:25, uciPts:997, uciRank:81 },
-  { name:"Porter Rudy", surname:"Rudy", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
-  { name:"Schmid Mauro", surname:"Mauro", team:"Team Jayco-AlUla", nation:"Svizzera", continent:"Europa", age:26, uciPts:1193, uciRank:61 },
-  { name:"Sütterlin Jasha", surname:"Jasha", team:"Team Jayco-AlUla", nation:"Germania", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Vendrame Andrea", surname:"Andrea", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Barguil Warren", surname:"Warren", team:"Team Picnic PostNL", nation:"Francia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Biesterbos Frits", surname:"Frits", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Bittner Pavel", surname:"Pavel", team:"Team Picnic PostNL", nation:"Rep. Ceca", continent:"Europa", age:23, uciPts:1126, uciRank:68 },
-  { name:"Corkery Dillon", surname:"Dillon", team:"Team Picnic PostNL", nation:"Irlanda", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"de Jong Timo", surname:"Timo", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Degenkolb John", surname:"John", team:"Team Picnic PostNL", nation:"Germania", continent:"Europa", age:37, uciPts:0, uciRank:0 },
-  { name:"Dhondt Robbe", surname:"Robbe", team:"Team Picnic PostNL", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Dinham Matthew", surname:"Matthew", team:"Team Picnic PostNL", nation:"Australia", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
-  { name:"Eekhoff Nils", surname:"Nils", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Faure-Prost Alexy", surname:"Alexy", team:"Team Picnic PostNL", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Flynn Sean", surname:"Sean", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Gaffuri Mattia", surname:"Mattia", team:"Team Picnic PostNL", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Hamilton Chris", surname:"Chris", team:"Team Picnic PostNL", nation:"Australia", continent:"Oceania", age:30, uciPts:0, uciRank:0 },
-  { name:"Haquin Henri-Francois", surname:"Henri-Francois", team:"Team Picnic PostNL", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Jakobsen Fabio", surname:"Fabio", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Knox James", surname:"James", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Koerdt Bjoern", surname:"Bjoern", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Leemreize Gijs", surname:"Gijs", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Martinez Juan", surname:"Juan", team:"Team Picnic PostNL", nation:"Colombia", continent:"Sud America", age:21, uciPts:0, uciRank:0 },
-  { name:"Märkl Niklas", surname:"Niklas", team:"Team Picnic PostNL", nation:"Germania", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Naberman Tim", surname:"Tim", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Peace Oliver", surname:"Oliver", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Poole Max", surname:"Max", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Roosen Timo", surname:"Timo", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"van den Berg Julius", surname:"Julius", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"van den Broek Frank", surname:"Frank", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"van Uden Casper", surname:"Casper", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Welten Bram", surname:"Bram", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Affini Edoardo", surname:"Edoardo", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Armirail Bruno", surname:"Bruno", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Barré Louis", surname:"Louis", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Behrens Niklas", surname:"Niklas", team:"Team Visma | Lease a Bike", nation:"Germania", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Brennan Matthew", surname:"Matthew", team:"Team Visma | Lease a Bike", nation:"Regno Unito", continent:"Europa", age:20, uciPts:1507, uciRank:43 },
-  { name:"Campenaerts Victor", surname:"Victor", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Doull Owain", surname:"Owain", team:"Team Visma | Lease a Bike", nation:"Regno Unito", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Fiorelli Filippo", surname:"Filippo", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Graat Tijmen", surname:"Tijmen", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Hagenes Per Strand", surname:"Strand", team:"Team Visma | Lease a Bike", nation:"Norvegia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Huising Menno", surname:"Menno", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Jorgenson Matteo", surname:"Matteo", team:"Team Visma | Lease a Bike", nation:"USA", continent:"Nord America", age:26, uciPts:1962, uciRank:29 },
-  { name:"Kelderman Wilco", surname:"Wilco", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Kielich Timo", surname:"Timo", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Kruijswijk Steven", surname:"Steven", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:38, uciPts:0, uciRank:0 },
-  { name:"Kuss Sepp", surname:"Sepp", team:"Team Visma | Lease a Bike", nation:"USA", continent:"Nord America", age:31, uciPts:861, uciRank:97 },
-  { name:"Laporte Christophe", surname:"Christophe", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Lemmen Bart", surname:"Bart", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Mattio Pietro", surname:"Pietro", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Nordhagen Jørgen", surname:"Jørgen", team:"Team Visma | Lease a Bike", nation:"Norvegia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Piganzoli Davide", surname:"Davide", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Rex Tim", surname:"Tim", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Schiffer Anton", surname:"Anton", team:"Team Visma | Lease a Bike", nation:"Germania", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Tulett Ben", surname:"Ben", team:"Team Visma | Lease a Bike", nation:"Regno Unito", continent:"Europa", age:24, uciPts:990, uciRank:82 },
-  { name:"van Aert Wout", surname:"Wout", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:31, uciPts:2908, uciRank:10 },
-  { name:"van Belle Loe", surname:"Loe", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Vingegaard Jonas", surname:"Jonas", team:"Team Visma | Lease a Bike", nation:"Danimarca", continent:"Europa", age:29, uciPts:5944, uciRank:2 },
-  { name:"Zingle Axel", surname:"Axel", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Almeida João", surname:"João", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:27, uciPts:4331, uciRank:5 },
-  { name:"Arrieta Igor", surname:"Igor", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Baroncini Filippo", surname:"Filippo", team:"UAE Team Emirates-XRG", nation:"Italia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Bjerg Mikkel", surname:"Mikkel", team:"UAE Team Emirates-XRG", nation:"Danimarca", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Christen Jan", surname:"Jan", team:"UAE Team Emirates-XRG", nation:"Svizzera", continent:"Europa", age:21, uciPts:1347, uciRank:52 },
-  { name:"Cosnefroy Benoît", surname:"Benoît", team:"UAE Team Emirates-XRG", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"del Toro Isaac", surname:"Isaac", team:"UAE Team Emirates-XRG", nation:"Messico", continent:"Nord America", age:22, uciPts:5514, uciRank:3 },
-  { name:"Giaimi Luca", surname:"Luca", team:"UAE Team Emirates-XRG", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Großschartner Felix", surname:"Felix", team:"UAE Team Emirates-XRG", nation:"Austria", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Herregodts Rune", surname:"Rune", team:"UAE Team Emirates-XRG", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Johansen Julius", surname:"Julius", team:"UAE Team Emirates-XRG", nation:"Danimarca", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Laengen Vegard Stake", surname:"Stake", team:"UAE Team Emirates-XRG", nation:"Norvegia", continent:"Europa", age:37, uciPts:0, uciRank:0 },
-  { name:"McNulty Brandon", surname:"Brandon", team:"UAE Team Emirates-XRG", nation:"USA", continent:"Nord America", age:27, uciPts:2153, uciRank:23 },
-  { name:"Molano Sebastian", surname:"Sebastian", team:"UAE Team Emirates-XRG", nation:"Colombia", continent:"Sud America", age:31, uciPts:0, uciRank:0 },
-  { name:"Morgado António", surname:"António", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:22, uciPts:985, uciRank:84 },
-  { name:"Narvaez Jhonatan", surname:"Jhonatan", team:"UAE Team Emirates-XRG", nation:"Ecuador", continent:"Sud America", age:29, uciPts:1497, uciRank:44 },
-  { name:"Novak Domen", surname:"Domen", team:"UAE Team Emirates-XRG", nation:"Slovenia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Oliveira Ivo", surname:"Ivo", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Oliveira Rui", surname:"Rui", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Pericas Adria", surname:"Adria", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:19, uciPts:0, uciRank:0 },
-  { name:"Pogacar Tadej", surname:"Tadej", team:"UAE Team Emirates-XRG", nation:"Slovenia", continent:"Europa", age:27, uciPts:11680, uciRank:1 },
-  { name:"Politt Nils", surname:"Nils", team:"UAE Team Emirates-XRG", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Sivakov Pavel", surname:"Pavel", team:"UAE Team Emirates-XRG", nation:"Francia", continent:"Europa", age:28, uciPts:1155, uciRank:64 },
-  { name:"Soler Marc", surname:"Marc", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Torres Pablo", surname:"Pablo", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Vermaerke Kevin", surname:"Kevin", team:"UAE Team Emirates-XRG", nation:"USA", continent:"Nord America", age:25, uciPts:0, uciRank:0 },
-  { name:"Vermeersch Florian", surname:"Florian", team:"UAE Team Emirates-XRG", nation:"Belgio", continent:"Europa", age:27, uciPts:1015, uciRank:79 },
-  { name:"Vine Jay", surname:"Jay", team:"UAE Team Emirates-XRG", nation:"Australia", continent:"Oceania", age:30, uciPts:2320, uciRank:20 },
-  { name:"Wellens Tim", surname:"Tim", team:"UAE Team Emirates-XRG", nation:"Belgio", continent:"Europa", age:34, uciPts:1250, uciRank:58 },
-  { name:"Yates Adam", surname:"Adam", team:"UAE Team Emirates-XRG", nation:"Regno Unito", continent:"Europa", age:33, uciPts:1322, uciRank:53 },
-  { name:"Abrahamsen Jonas", surname:"Jonas", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:30, uciPts:989, uciRank:83 },
-  { name:"Bevort Carl-Frederik", surname:"Carl-Frederik", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Blikra Erlend", surname:"Erlend", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Blume Levy William", surname:"William", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Bugge Martin Urianstad", surname:"Urianstad", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Bystrøm Sven Erik", surname:"Erik", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Charmig Anthon", surname:"Anthon", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Cort Magnus", surname:"Magnus", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Dalby Simon", surname:"Simon", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Dversnes Fredrik", surname:"Fredrik", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Fredheim Stian", surname:"Stian", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Hoelgaard Markus", surname:"Markus", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Holter Ådne", surname:"Ådne", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Hvideberg Jonas Hem", surname:"Hem", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Ingebrigtsen Storm", surname:"Storm", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Johannessen Anders Halland", surname:"Halland", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:1441, uciRank:50 },
-  { name:"Johannessen Tobias Halland", surname:"Halland", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:1441, uciRank:50 },
-  { name:"Kamp Alexander", surname:"Alexander", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Kron Andreas", surname:"Andreas", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Kulset Johannes", surname:"Johannes", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Leknessund Andreas", surname:"Andreas", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Løland Sakarias Koller", surname:"Koller", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Pedersen Henrik", surname:"Henrik", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Resell Erik", surname:"Erik", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Skaarseth Anders", surname:"Anders", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Svarre Tobias", surname:"Tobias", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Tiller Rasmus", surname:"Rasmus", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Tjøtta Martin", surname:"Martin", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Træen Torstein", surname:"Torstein", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Wærenskjold Søren", surname:"Søren", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:1183, uciRank:62 },
-  { name:"Ballerini Davide", surname:"Davide", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Bettiol Alberto", surname:"Alberto", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Champoussin Clément", surname:"Clément", team:"XDS Astana Team", nation:"Francia", continent:"Europa", age:27, uciPts:957, uciRank:86 },
-  { name:"Conci Nicola", surname:"Nicola", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Fedorov Yevgeniy", surname:"Yevgeniy", team:"XDS Astana Team", nation:"Kazakistan", continent:"Asia", age:26, uciPts:0, uciRank:0 },
-  { name:"Fortunato Lorenzo", surname:"Lorenzo", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:29, uciPts:1447, uciRank:48 },
-  { name:"Gate Aaron", surname:"Aaron", team:"XDS Astana Team", nation:"Nuova Zelanda", continent:"Oceania", age:35, uciPts:0, uciRank:0 },
-  { name:"Gonov Lev", surname:"Lev", team:"XDS Astana Team", nation:"Russia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Higuita Sergio", surname:"Sergio", team:"XDS Astana Team", nation:"Colombia", continent:"Sud America", age:28, uciPts:0, uciRank:0 },
-  { name:"Kajamini Florian", surname:"Florian", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Kanter Max", surname:"Max", team:"XDS Astana Team", nation:"Germania", continent:"Europa", age:28, uciPts:1004, uciRank:80 },
-  { name:"Kuzmin Anton", surname:"Anton", team:"XDS Astana Team", nation:"Kazakistan", continent:"Asia", age:29, uciPts:0, uciRank:0 },
-  { name:"Livyns Arjen", surname:"Arjen", team:"XDS Astana Team", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"López Martin", surname:"Martin", team:"XDS Astana Team", nation:"Ecuador", continent:"Sud America", age:25, uciPts:869, uciRank:96 },
-  { name:"Malucelli Matteo", surname:"Matteo", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Mulubrhan Henok", surname:"Henok", team:"XDS Astana Team", nation:"Eritrea", continent:"Africa", age:26, uciPts:983, uciRank:85 },
-  { name:"Rodriguez Cristian", surname:"Cristian", team:"XDS Astana Team", nation:"Spagna", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Romele Alessandro", surname:"Alessandro", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Scaroni Christian", surname:"Christian", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:28, uciPts:2399, uciRank:18 },
-  { name:"Schrettl Marco", surname:"Marco", team:"XDS Astana Team", nation:"Austria", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Silva Thomas", surname:"Thomas", team:"XDS Astana Team", nation:"Uruguay", continent:"Sud America", age:24, uciPts:913, uciRank:91 },
-  { name:"Su Haoyu", surname:"Haoyu", team:"XDS Astana Team", nation:"Cina", continent:"Asia", age:25, uciPts:0, uciRank:0 },
-  { name:"Syritsa Gleb", surname:"Gleb", team:"XDS Astana Team", nation:"Russia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Tejada Harold", surname:"Harold", team:"XDS Astana Team", nation:"Colombia", continent:"Sud America", age:28, uciPts:0, uciRank:0 },
-  { name:"Teunissen Mike", surname:"Mike", team:"XDS Astana Team", nation:"Olanda", continent:"Europa", age:33, uciPts:846, uciRank:98 },
-  { name:"Toneatti Davide", surname:"Davide", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Ulissi Diego", surname:"Diego", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:36, uciPts:957, uciRank:86 },
-  { name:"van Bekkum Darren", surname:"Darren", team:"XDS Astana Team", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Velasco Simone", surname:"Simone", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:30, uciPts:1464, uciRank:46 },
-  { name:"Vinokurov Nicolas", surname:"Nicolas", team:"XDS Astana Team", nation:"Kazakistan", continent:"Asia", age:23, uciPts:0, uciRank:0 },
-  { name:"Azparren Xabier", surname:"Xabier", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Badilatti Matteo", surname:"Matteo", team:"Pinarello Q36.5", nation:"Svizzera", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Bax Sjoerd", surname:"Sjoerd", team:"Pinarello Q36.5", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Bennett Sam", surname:"Sam", team:"Pinarello Q36.5", nation:"Irlanda", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Calzoni Walter", surname:"Walter", team:"Pinarello Q36.5", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Camprubí Marcel", surname:"Marcel", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Christen Fabio", surname:"Fabio", team:"Pinarello Q36.5", nation:"Svizzera", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"De Gendt Aimé", surname:"Aimé", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"de la Cruz David", surname:"David", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:36, uciPts:0, uciRank:0 },
-  { name:"Donovan Mark", surname:"Mark", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Dunbar Edward", surname:"Edward", team:"Pinarello Q36.5", nation:"Irlanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Frison Frederik", surname:"Frederik", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Gloag Thomas", surname:"Thomas", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"González David", surname:"David", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Harper Chris", surname:"Chris", team:"Pinarello Q36.5", nation:"Australia", continent:"Oceania", age:31, uciPts:0, uciRank:0 },
-  { name:"Hermans Quinten", surname:"Quinten", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Houcou Emmanuel", surname:"Emmanuel", team:"Pinarello Q36.5", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Howson Damien", surname:"Damien", team:"Pinarello Q36.5", nation:"Australia", continent:"Oceania", age:33, uciPts:0, uciRank:0 },
-  { name:"Liepins Emils", surname:"Emils", team:"Pinarello Q36.5", nation:"Lettonia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Malecki Kamil", surname:"Kamil", team:"Pinarello Q36.5", nation:"Polonia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Meurisse Xandro", surname:"Xandro", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Moschetti Matteo", surname:"Matteo", team:"Pinarello Q36.5", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Parisini Nicolò", surname:"Nicolò", team:"Pinarello Q36.5", nation:"Italia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Pidcock Joseph", surname:"Joseph", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Pidcock Tom", surname:"Tom", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:26, uciPts:3904, uciRank:7 },
-  { name:"Vader Milan", surname:"Milan", team:"Pinarello Q36.5", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Van Moer Brent", surname:"Brent", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Vanhoucke Harm", surname:"Harm", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Wright Fred", surname:"Fred", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:26, uciPts:1093, uciRank:71 },
-  { name:"Zukowsky Nickolas", surname:"Nickolas", team:"Pinarello Q36.5", nation:"Canada", continent:"Nord America", age:27, uciPts:0, uciRank:0 },
-  { name:"Alaphilippe Julian", surname:"Julian", team:"Tudor Pro Cycling Team", nation:"Francia", continent:"Europa", age:33, uciPts:1446, uciRank:49 },
-  { name:"Barta William", surname:"William", team:"Tudor Pro Cycling Team", nation:"USA", continent:"Nord America", age:30, uciPts:0, uciRank:0 },
-  { name:"Brenner Marco", surname:"Marco", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"de Kleijn Arvid", surname:"Arvid", team:"Tudor Pro Cycling Team", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Donzé Robin", surname:"Robin", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Eriksson Jacob", surname:"Jacob", team:"Tudor Pro Cycling Team", nation:"Svezia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Froidevaux Robin", surname:"Robin", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Haller Marco", surname:"Marco", team:"Tudor Pro Cycling Team", nation:"Austria", continent:"Europa", age:35, uciPts:0, uciRank:0 },
-  { name:"Hirschi Marc", surname:"Marc", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:1262, uciRank:56 },
-  { name:"Kelemen Petr", surname:"Petr", team:"Tudor Pro Cycling Team", nation:"Rep. Ceca", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Kluckers Arthur", surname:"Arthur", team:"Tudor Pro Cycling Team", nation:"Lussemburgo", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Kolze Changizi Sebastian", surname:"Sebastian", team:"Tudor Pro Cycling Team", nation:"Danimarca", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Küng Stefan", surname:"Stefan", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Lienhard Fabian", surname:"Fabian", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Mayrhofer Marius", surname:"Marius", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Mikutis Aivaras", surname:"Aivaras", team:"Tudor Pro Cycling Team", nation:"Lituania", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Mozzato Luca", surname:"Luca", team:"Tudor Pro Cycling Team", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Pluimers Rick", surname:"Rick", team:"Tudor Pro Cycling Team", nation:"Olanda", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Rondel Mathys", surname:"Mathys", team:"Tudor Pro Cycling Team", nation:"Francia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Storer Michael", surname:"Michael", team:"Tudor Pro Cycling Team", nation:"Australia", continent:"Oceania", age:29, uciPts:2083, uciRank:27 },
-  { name:"Stork Florian", surname:"Florian", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Suter Joel", surname:"Joel", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Thalmann Roland", surname:"Roland", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:32, uciPts:0, uciRank:0 },
-  { name:"Trentin Matteo", surname:"Matteo", team:"Tudor Pro Cycling Team", nation:"Italia", continent:"Europa", age:36, uciPts:890, uciRank:94 },
-  { name:"Voisard Yannis", surname:"Yannis", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Warbasse Lawrence", surname:"Lawrence", team:"Tudor Pro Cycling Team", nation:"USA", continent:"Nord America", age:35, uciPts:0, uciRank:0 },
-  { name:"Weiss Fabian", surname:"Fabian", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Wilksch Hannes", surname:"Hannes", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Wirtgen Luc", surname:"Luc", team:"Tudor Pro Cycling Team", nation:"Lussemburgo", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Zijlaard Maikel", surname:"Maikel", team:"Tudor Pro Cycling Team", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Bais Davide", surname:"Davide", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Bais Mattia", surname:"Mattia", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Belletta Dario", surname:"Dario", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Benito Adrián", surname:"Adrián", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Bessega Gabriele", surname:"Gabriele", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Bessega Tommaso", surname:"Tommaso", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Buttigieg Aidan", surname:"Aidan", team:"Team Polti VisitMalta", nation:"Malta", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Crescioli Ludovico", surname:"Ludovico", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Crozzolo Fabrizio", surname:"Fabrizio", team:"Team Polti VisitMalta", nation:"Argentina", continent:"Sud America", age:21, uciPts:0, uciRank:0 },
-  { name:"Garcia Pablo", surname:"Pablo", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Giuliano Dario", surname:"Dario", team:"Team Polti VisitMalta", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Gómez Germán Dario", surname:"Dario", team:"Team Polti VisitMalta", nation:"Colombia", continent:"Sud America", age:25, uciPts:0, uciRank:0 },
-  { name:"Lonardi Giovanni", surname:"Giovanni", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Maestri Mirco", surname:"Mirco", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Mifsud Andrea", surname:"Andrea", team:"Team Polti VisitMalta", nation:"Malta", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Muñoz Francisco", surname:"Francisco", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Peñalver Manuel", surname:"Manuel", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Pesenti Thomas", surname:"Thomas", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Pietrobon Andrea", surname:"Andrea", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Raccagni Gabriele", surname:"Gabriele", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Serrano Javier", surname:"Javier", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Sevilla Diego", surname:"Diego", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Tercero Fernando", surname:"Fernando", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Tonelli Alessandro", surname:"Alessandro", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Allegaert Piet", surname:"Piet", team:"Cofidis", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Aniolkowski Stanislaw", surname:"Stanislaw", team:"Cofidis", nation:"Polonia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Aranburu Alex", surname:"Alex", team:"Cofidis", nation:"Spagna", continent:"Europa", age:30, uciPts:1167, uciRank:63 },
-  { name:"Biermans Jenthe", surname:"Jenthe", team:"Cofidis", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Buchmann Emanuel", surname:"Emanuel", team:"Cofidis", nation:"Germania", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Carr Simon", surname:"Simon", team:"Cofidis", nation:"Regno Unito", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Charret Camille", surname:"Camille", team:"Cofidis", nation:"Francia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
-  { name:"Coquard Bryan", surname:"Bryan", team:"Cofidis", nation:"Francia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Debeaumarché Nicolas", surname:"Nicolas", team:"Cofidis", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Ferron Valentin", surname:"Valentin", team:"Cofidis", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Fretin Milan", surname:"Milan", team:"Cofidis", nation:"Belgio", continent:"Europa", age:25, uciPts:1130, uciRank:66 },
-  { name:"Izagirre Ion", surname:"Ion", team:"Cofidis", nation:"Spagna", continent:"Europa", age:37, uciPts:0, uciRank:0 },
-  { name:"Izquierdo Clement", surname:"Clement", team:"Cofidis", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Joalland Yaël", surname:"Yaël", team:"Cofidis", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Kirsch Alex", surname:"Alex", team:"Cofidis", nation:"Lussemburgo", continent:"Europa", age:33, uciPts:0, uciRank:0 },
-  { name:"Knight Oliver", surname:"Oliver", team:"Cofidis", nation:"Regno Unito", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Maas Jan", surname:"Jan", team:"Cofidis", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Maisonobe Sam", surname:"Sam", team:"Cofidis", nation:"Francia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Meehan Jamie", surname:"Jamie", team:"Cofidis", nation:"Irlanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
-  { name:"Moniquet Sylvain", surname:"Sylvain", team:"Cofidis", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
-  { name:"Ourselin Paul", surname:"Paul", team:"Cofidis", nation:"Francia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Page Hugo", surname:"Hugo", team:"Cofidis", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Renard Alexis", surname:"Alexis", team:"Cofidis", nation:"Francia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Robeet Ludovic", surname:"Ludovic", team:"Cofidis", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
-  { name:"Rouland Louis", surname:"Louis", team:"Cofidis", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Samitier Sergio", surname:"Sergio", team:"Cofidis", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Teuns Dylan", surname:"Dylan", team:"Cofidis", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
-  { name:"Thomas Benjamin", surname:"Benjamin", team:"Cofidis", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
-  { name:"Touzé Damien", surname:"Damien", team:"Cofidis", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Zamperini Edoardo", surname:"Edoardo", team:"Cofidis", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Cettolin Filippo", surname:"Filippo", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
-  { name:"Colnaghi Luca", surname:"Luca", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Conforti Lorenzo", surname:"Lorenzo", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Covili Luca", surname:"Luca", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
-  { name:"Cruz Martínez Edward", surname:"Edward", team:"Bardiani-CSF", nation:"Colombia", continent:"Sud America", age:19, uciPts:0, uciRank:0 },
-  { name:"Ferraro Santiago", surname:"Santiago", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
-  { name:"Herreño Martín", surname:"Martín", team:"Bardiani-CSF", nation:"Colombia", continent:"Sud America", age:19, uciPts:0, uciRank:0 },
-  { name:"Magli Filippo", surname:"Filippo", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Manenti Marco", surname:"Marco", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
-  { name:"Marcellusi Martin", surname:"Martin", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
-  { name:"Martinelli Alessio", surname:"Alessio", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Montagner Andrea", surname:"Andrea", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Paletti Luca", surname:"Luca", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
-  { name:"Pinazzi Mattia", surname:"Mattia", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
-  { name:"Rojas Vicente", surname:"Vicente", team:"Bardiani-CSF", nation:"Cile", continent:"Sud America", age:23, uciPts:0, uciRank:0 },
-  { name:"Rostovtsev Sergei", surname:"Sergei", team:"Bardiani-CSF", nation:"Uzbekistan", continent:"Asia", age:28, uciPts:0, uciRank:0 },
-  { name:"Stenico Mattia", surname:"Mattia", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
-  { name:"Tarozzi Manuele", surname:"Manuele", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
-  { name:"Tolio Alex", surname:"Alex", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
-  { name:"Tsvetkov Nikita", surname:"Nikita", team:"Bardiani-CSF", nation:"Uzbekistan", continent:"Asia", age:21, uciPts:0, uciRank:0 },
-  { name:"Turconi Filippo", surname:"Filippo", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
-  { name:"Turconi Matteo", surname:"Matteo", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:18, uciPts:0, uciRank:0 },
-  { name:"Zanoncello Enrico", surname:"Enrico", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Maurice Ballerstedt", surname:"Ballerstedt", team:"Alpecin-Premier Tech", nation:"Germania", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Tobias Bayer", surname:"Bayer", team:"Alpecin-Premier Tech", nation:"Austria", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Lennert Belmans", surname:"Belmans", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Francesco Busatto", surname:"Busatto", team:"Alpecin-Premier Tech", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Lindsay De Vylder", surname:"De Vylder", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Ramses Debruyne", surname:"Debruyne", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Simon Dehairs", surname:"Dehairs", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Tibor Del Grosso", surname:"Del Grosso", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Silvan Dillier", surname:"Dillier", team:"Alpecin-Premier Tech", nation:"Svizzera", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Aaron Dockx", surname:"Dockx", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Jonas Geens", surname:"Geens", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Gal Glivar", surname:"Glivar", team:"Alpecin-Premier Tech", nation:"Slovenia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Michael Gogl", surname:"Gogl", team:"Alpecin-Premier Tech", nation:"Austria", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Kaden Groves", surname:"Groves", team:"Alpecin-Premier Tech", nation:"Australia", continent:"Oceania", age:27, uciPts:1420, uciRank:51 },
+  { name:"Hugo Houle", surname:"Houle", team:"Alpecin-Premier Tech", nation:"Canada", continent:"Nord America", age:35, uciPts:0, uciRank:0 },
+  { name:"Tim Marsman", surname:"Marsman", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Jasper Philipsen", surname:"Philipsen", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:28, uciPts:2438, uciRank:17 },
+  { name:"Edward Planckaert", surname:"Planckaert", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Jensen Plowright", surname:"Plowright", team:"Alpecin-Premier Tech", nation:"Australia", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
+  { name:"Johan Price-Pejtersen", surname:"Price-Pejtersen", team:"Alpecin-Premier Tech", nation:"Danimarca", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Senna Remijn", surname:"Remijn", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Jonas Rickaert", surname:"Rickaert", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Oscar Riesebeek", surname:"Riesebeek", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Florian Sénéchal", surname:"Sénéchal", team:"Alpecin-Premier Tech", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Sente Sentjens", surname:"Sentjens", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Gerben Thijssen", surname:"Thijssen", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Henri Uhlig", surname:"Uhlig", team:"Alpecin-Premier Tech", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Mathieu van der Poel", surname:"van der Poel", team:"Alpecin-Premier Tech", nation:"Olanda", continent:"Europa", age:31, uciPts:3838, uciRank:8 },
+  { name:"Luca Vergallito", surname:"Vergallito", team:"Alpecin-Premier Tech", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Emiel Verstrynge", surname:"Verstrynge", team:"Alpecin-Premier Tech", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Nikias Arndt", surname:"Arndt", team:"Bahrain Victorious", nation:"Germania", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Phil Bauhaus", surname:"Bauhaus", team:"Bahrain Victorious", nation:"Germania", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Pello Bilbao", surname:"Bilbao", team:"Bahrain Victorious", nation:"Spagna", continent:"Europa", age:36, uciPts:1078, uciRank:74 },
+  { name:"Alessandro Borgo", surname:"Borgo", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Alberto Bruttomesso", surname:"Bruttomesso", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Santiago Buitrago", surname:"Buitrago", team:"Bahrain Victorious", nation:"Colombia", continent:"Sud America", age:26, uciPts:1077, uciRank:75 },
+  { name:"Damiano Caruso", surname:"Caruso", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:38, uciPts:871, uciRank:95 },
+  { name:"Roman Ermakov", surname:"Ermakov", team:"Bahrain Victorious", nation:"Russia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Zak Erzen", surname:"Erzen", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Afonso Eulalio", surname:"Eulalio", team:"Bahrain Victorious", nation:"Portogallo", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Matevz Govekar", surname:"Govekar", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Kamil Gradek", surname:"Gradek", team:"Bahrain Victorious", nation:"Polonia", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Rainer Kepplinger", surname:"Kepplinger", team:"Bahrain Victorious", nation:"Austria", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Lenny Martinez", surname:"Martinez", team:"Bahrain Victorious", nation:"Francia", continent:"Europa", age:22, uciPts:1873, uciRank:31 },
+  { name:"Fran Miholjevic", surname:"Miholjevic", team:"Bahrain Victorious", nation:"Croazia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Pau Miquel Delgado", surname:"Miquel Delgado", team:"Bahrain Victorious", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Matej Mohoric", surname:"Mohoric", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Jakob Omrzel", surname:"Omrzel", team:"Bahrain Victorious", nation:"Slovenia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Mathijs Paasschens", surname:"Paasschens", team:"Bahrain Victorious", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Alec Segaert", surname:"Segaert", team:"Bahrain Victorious", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Daniel Skerl", surname:"Skerl", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Robert Stannard", surname:"Stannard", team:"Bahrain Victorious", nation:"Australia", continent:"Oceania", age:27, uciPts:0, uciRank:0 },
+  { name:"Oliver Stockwell", surname:"Stockwell", team:"Bahrain Victorious", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Antonio Tiberi", surname:"Tiberi", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:24, uciPts:1109, uciRank:69 },
+  { name:"Attila Valter", surname:"Valter", team:"Bahrain Victorious", nation:"Ungheria", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Max van der Meulen", surname:"van der Meulen", team:"Bahrain Victorious", nation:"Olanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Vlad Van Mechelen", surname:"Van Mechelen", team:"Bahrain Victorious", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Edoardo Zambanini", surname:"Zambanini", team:"Bahrain Victorious", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Tiesj Benoot", surname:"Benoot", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:32, uciPts:1295, uciRank:54 },
+  { name:"Léo Bisiaux", surname:"Bisiaux", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Stefan Bissegger", surname:"Bissegger", team:"Decathlon CMA CGM Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Cees Bol", surname:"Bol", team:"Decathlon CMA CGM Team", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Oscar Chamberlain", surname:"Chamberlain", team:"Decathlon CMA CGM Team", nation:"Australia", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
+  { name:"Sander De Pestel", surname:"De Pestel", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Stan Dewulf", surname:"Dewulf", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Felix Gall", surname:"Gall", team:"Decathlon CMA CGM Team", nation:"Austria", continent:"Europa", age:28, uciPts:2216, uciRank:22 },
+  { name:"Pierre Gautherat", surname:"Gautherat", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Robbe Ghys", surname:"Ghys", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Tord Gudmestad", surname:"Gudmestad", team:"Decathlon CMA CGM Team", nation:"Norvegia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Daan Hoole", surname:"Hoole", team:"Decathlon CMA CGM Team", nation:"Olanda", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Noa Isidore", surname:"Isidore", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Olav Kooij", surname:"Kooij", team:"Decathlon CMA CGM Team", nation:"Olanda", continent:"Europa", age:24, uciPts:2123, uciRank:26 },
+  { name:"Antoine L'Hote", surname:"L'Hote", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Jordan Labrosse", surname:"Labrosse", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Paul Lapeira", surname:"Lapeira", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Tobias Lund Andresen", surname:"Lund Andresen", team:"Decathlon CMA CGM Team", nation:"Danimarca", continent:"Europa", age:23, uciPts:1252, uciRank:57 },
+  { name:"Gregor Mühlberger", surname:"Mühlberger", team:"Decathlon CMA CGM Team", nation:"Austria", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Oliver Naesen", surname:"Naesen", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Aurélien Paret-Peintre", surname:"Paret-Peintre", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Søjberg Pedersen Rasmus", surname:"Pedersen Rasmus", team:"Decathlon CMA CGM Team", nation:"Danimarca", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Gianluca Pollefliet", surname:"Pollefliet", team:"Decathlon CMA CGM Team", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Nicolas Prodhomme", surname:"Prodhomme", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:29, uciPts:1108, uciRank:70 },
+  { name:"Matthew Riccitello", surname:"Riccitello", team:"Decathlon CMA CGM Team", nation:"USA", continent:"Nord America", age:24, uciPts:1019, uciRank:78 },
+  { name:"Callum Scotson", surname:"Scotson", team:"Decathlon CMA CGM Team", nation:"Australia", continent:"Oceania", age:29, uciPts:0, uciRank:0 },
+  { name:"Paul Seixas", surname:"Seixas", team:"Decathlon CMA CGM Team", nation:"Francia", continent:"Europa", age:19, uciPts:1128, uciRank:67 },
+  { name:"Johannes Staune-Mittet", surname:"Staune-Mittet", team:"Decathlon CMA CGM Team", nation:"Norvegia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Mattia Agostinacchio", surname:"Agostinacchio", team:"EF Education-EasyPost", nation:"Italia", continent:"Europa", age:18, uciPts:0, uciRank:0 },
+  { name:"Vincenzo Albanese", surname:"Albanese", team:"EF Education-EasyPost", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Kasper Asgreen", surname:"Asgreen", team:"EF Education-EasyPost", nation:"Danimarca", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Samuele Battistella", surname:"Battistella", team:"EF Education-EasyPost", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Alex Baudin", surname:"Baudin", team:"EF Education-EasyPost", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Markel Beloki", surname:"Beloki", team:"EF Education-EasyPost", nation:"Spagna", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Richard Carapaz", surname:"Carapaz", team:"EF Education-EasyPost", nation:"Ecuador", continent:"Sud America", age:32, uciPts:1807, uciRank:33 },
+  { name:"Alexander Cepeda", surname:"Cepeda", team:"EF Education-EasyPost", nation:"Ecuador", continent:"Sud America", age:27, uciPts:0, uciRank:0 },
+  { name:"Ben Healy", surname:"Healy", team:"EF Education-EasyPost", nation:"Irlanda", continent:"Europa", age:25, uciPts:2742, uciRank:13 },
+  { name:"Noah Hobbs", surname:"Hobbs", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Mikkel Honore", surname:"Honore", team:"EF Education-EasyPost", nation:"Danimarca", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Luke Lamperti", surname:"Lamperti", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:23, uciPts:0, uciRank:0 },
+  { name:"Michael Leonard", surname:"Leonard", team:"EF Education-EasyPost", nation:"Canada", continent:"Nord America", age:22, uciPts:0, uciRank:0 },
+  { name:"Alastair Mackellar", surname:"Mackellar", team:"EF Education-EasyPost", nation:"Australia", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
+  { name:"Madis Mihkels", surname:"Mihkels", team:"EF Education-EasyPost", nation:"Estonia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Lukas Nerurkar", surname:"Nerurkar", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Neilson Powless", surname:"Powless", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:29, uciPts:1610, uciRank:39 },
+  { name:"Sean Quinn", surname:"Quinn", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:25, uciPts:0, uciRank:0 },
+  { name:"Darren Rafferty", surname:"Rafferty", team:"EF Education-EasyPost", nation:"Irlanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Archie Ryan", surname:"Ryan", team:"EF Education-EasyPost", nation:"Irlanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Matthias Schwarzbacher", surname:"Schwarzbacher", team:"EF Education-EasyPost", nation:"Slovacchia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"James Shaw", surname:"Shaw", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Colby Simmons", surname:"Simmons", team:"EF Education-EasyPost", nation:"USA", continent:"Nord America", age:22, uciPts:0, uciRank:0 },
+  { name:"Georg Steinhauser", surname:"Steinhauser", team:"EF Education-EasyPost", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Harry Sweeny", surname:"Sweeny", team:"EF Education-EasyPost", nation:"Australia", continent:"Oceania", age:27, uciPts:0, uciRank:0 },
+  { name:"Michael Valgren", surname:"Valgren", team:"EF Education-EasyPost", nation:"Danimarca", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Marijn van den Berg", surname:"van den Berg", team:"EF Education-EasyPost", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Jardi Van Der Lee", surname:"Van Der Lee", team:"EF Education-EasyPost", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Max Walker", surname:"Walker", team:"EF Education-EasyPost", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Cyril Barthe", surname:"Barthe", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Clément Berthet", surname:"Berthet", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Lewis Bower", surname:"Bower", team:"Groupama-FDJ United", nation:"Nuova Zelanda", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
+  { name:"Clément Braz Afonso", surname:"Braz Afonso", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Remi Cavagna", surname:"Cavagna", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Ewen Costiou", surname:"Costiou", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Maxime Decomble", surname:"Decomble", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Tom Donnenwirth", surname:"Donnenwirth", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Titouan Fontaine", surname:"Fontaine", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"David Gaudu", surname:"Gaudu", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Kevin Geniets", surname:"Geniets", team:"Groupama-FDJ United", nation:"Lussemburgo", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Lorenzo Germani", surname:"Germani", team:"Groupama-FDJ United", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Romain Grégoire", surname:"Grégoire", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:23, uciPts:1790, uciRank:34 },
+  { name:"Thibaud Gruel", surname:"Gruel", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Axel Huens", surname:"Huens", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Johan Jacobs", surname:"Jacobs", team:"Groupama-FDJ United", nation:"Svizzera", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Josh Kench", surname:"Kench", team:"Groupama-FDJ United", nation:"Nuova Zelanda", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
+  { name:"Olivier Le Gac", surname:"Le Gac", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Valentin Madouas", surname:"Madouas", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Guillaume Martin-Guyonnet", surname:"Martin-Guyonnet", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Matteo Milan", surname:"Milan", team:"Groupama-FDJ United", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Rudy Molard", surname:"Molard", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:36, uciPts:0, uciRank:0 },
+  { name:"Quentin Pacher", surname:"Pacher", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Enzo Paleni", surname:"Paleni", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Paul Penhoët", surname:"Penhoët", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Rémy Rochas", surname:"Rochas", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Brieuc Rolland", surname:"Rolland", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Clément Russo", surname:"Russo", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Bastien Tronchon", surname:"Tronchon", team:"Groupama-FDJ United", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Thymen Arensman", surname:"Arensman", team:"INEOS Grenadiers", nation:"Olanda", continent:"Europa", age:26, uciPts:1548, uciRank:41 },
+  { name:"AJ August", surname:"August", team:"INEOS Grenadiers", nation:"USA", continent:"Nord America", age:20, uciPts:0, uciRank:0 },
+  { name:"Egan Bernal", surname:"Bernal", team:"INEOS Grenadiers", nation:"Colombia", continent:"Sud America", age:29, uciPts:1742, uciRank:36 },
+  { name:"Laurens De Plus", surname:"De Plus", team:"INEOS Grenadiers", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Tobias Foss", surname:"Foss", team:"INEOS Grenadiers", nation:"Norvegia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Filippo Ganna", surname:"Ganna", team:"INEOS Grenadiers", nation:"Italia", continent:"Europa", age:29, uciPts:2152, uciRank:24 },
+  { name:"Dorian Godon", surname:"Godon", team:"INEOS Grenadiers", nation:"Francia", continent:"Europa", age:29, uciPts:1069, uciRank:76 },
+  { name:"Jack Haig", surname:"Haig", team:"INEOS Grenadiers", nation:"Australia", continent:"Oceania", age:32, uciPts:0, uciRank:0 },
+  { name:"Lucas Hamilton", surname:"Hamilton", team:"INEOS Grenadiers", nation:"Australia", continent:"Oceania", age:30, uciPts:0, uciRank:0 },
+  { name:"Kim Heiduk", surname:"Heiduk", team:"INEOS Grenadiers", nation:"Germania", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Bob Jungels", surname:"Jungels", team:"INEOS Grenadiers", nation:"Lussemburgo", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Michal Kwiatkowski", surname:"Kwiatkowski", team:"INEOS Grenadiers", nation:"Polonia", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Victor Langellotti", surname:"Langellotti", team:"INEOS Grenadiers", nation:"Monaco", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Axel Laurance", surname:"Laurance", team:"INEOS Grenadiers", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Oscar Onley", surname:"Onley", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:23, uciPts:2910, uciRank:9 },
+  { name:"Brandon Rivera", surname:"Rivera", team:"INEOS Grenadiers", nation:"Colombia", continent:"Sud America", age:30, uciPts:0, uciRank:0 },
+  { name:"Carlos Rodriguez", surname:"Rodriguez", team:"INEOS Grenadiers", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Óscar Rodríguez", surname:"Rodríguez", team:"INEOS Grenadiers", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Magnus Sheffield", surname:"Sheffield", team:"INEOS Grenadiers", nation:"USA", continent:"Nord America", age:23, uciPts:904, uciRank:92 },
+  { name:"Artem Shmidt", surname:"Shmidt", team:"INEOS Grenadiers", nation:"USA", continent:"Nord America", age:22, uciPts:0, uciRank:0 },
+  { name:"Embret Svestad-Bårdseng", surname:"Svestad-Bårdseng", team:"INEOS Grenadiers", nation:"Norvegia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Ben Swift", surname:"Swift", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:38, uciPts:0, uciRank:0 },
+  { name:"Connor Swift", surname:"Swift", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Joshua Tarling", surname:"Tarling", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Ben Turner", surname:"Turner", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Kévin Vauquelin", surname:"Vauquelin", team:"INEOS Grenadiers", nation:"Francia", continent:"Europa", age:24, uciPts:2459, uciRank:16 },
+  { name:"Sam Watson", surname:"Watson", team:"INEOS Grenadiers", nation:"Regno Unito", continent:"Europa", age:24, uciPts:894, uciRank:93 },
+  { name:"Sam Welsford", surname:"Welsford", team:"INEOS Grenadiers", nation:"Australia", continent:"Oceania", age:30, uciPts:0, uciRank:0 },
+  { name:"Peter Øxenberg", surname:"Øxenberg", team:"INEOS Grenadiers", nation:"Danimarca", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Juan Ayuso", surname:"Ayuso", team:"Lidl-Trek", nation:"Spagna", continent:"Europa", age:23, uciPts:2602, uciRank:14 },
+  { name:"Andrea Bagioli", surname:"Bagioli", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:27, uciPts:917, uciRank:90 },
+  { name:"Julien Bernard", surname:"Bernard", team:"Lidl-Trek", nation:"Francia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Giulio Ciccone", surname:"Ciccone", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:31, uciPts:2752, uciRank:12 },
+  { name:"Simone Consonni", surname:"Consonni", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Derek Gee-West", surname:"Gee-West", team:"Lidl-Trek", nation:"Canada", continent:"Nord America", age:28, uciPts:1620, uciRank:38 },
+  { name:"Tao Geoghegan Hart", surname:"Geoghegan Hart", team:"Lidl-Trek", nation:"Regno Unito", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Amanuel Ghebreigzabhier", surname:"Ghebreigzabhier", team:"Lidl-Trek", nation:"Eritrea", continent:"Africa", age:31, uciPts:0, uciRank:0 },
+  { name:"Patrick Konrad", surname:"Konrad", team:"Lidl-Trek", nation:"Austria", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Søren Kragh Andersen", surname:"Kragh Andersen", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Lennard Kämna", surname:"Kämna", team:"Lidl-Trek", nation:"Germania", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Jonathan Milan", surname:"Milan", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:25, uciPts:2144, uciRank:25 },
+  { name:"Bauke Mollema", surname:"Mollema", team:"Lidl-Trek", nation:"Olanda", continent:"Europa", age:39, uciPts:0, uciRank:0 },
+  { name:"Jacopo Mosca", surname:"Mosca", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Sunekær Norsgaard Mathias", surname:"Norsgaard Mathias", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Thibau Nys", surname:"Nys", team:"Lidl-Trek", nation:"Belgio", continent:"Europa", age:23, uciPts:846, uciRank:98 },
+  { name:"Sam Oomen", surname:"Oomen", team:"Lidl-Trek", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Mads Pedersen", surname:"Pedersen", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:30, uciPts:5074, uciRank:4 },
+  { name:"Quinn Simmons", surname:"Simmons", team:"Lidl-Trek", nation:"USA", continent:"Nord America", age:24, uciPts:1280, uciRank:55 },
+  { name:"Mattias Skjelmose", surname:"Skjelmose", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:25, uciPts:2254, uciRank:21 },
+  { name:"Toms Skujins", surname:"Skujins", team:"Lidl-Trek", nation:"Lettonia", continent:"Europa", age:34, uciPts:1091, uciRank:72 },
+  { name:"Matteo Sobrero", surname:"Sobrero", team:"Lidl-Trek", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Jakob Söderqvist", surname:"Söderqvist", team:"Lidl-Trek", nation:"Svezia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Torn Teutenberg Tim", surname:"Teutenberg Tim", team:"Lidl-Trek", nation:"Germania", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Edward Theuns", surname:"Theuns", team:"Lidl-Trek", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Mathias Vacek", surname:"Vacek", team:"Lidl-Trek", nation:"Rep. Ceca", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Otto Vergaerde", surname:"Vergaerde", team:"Lidl-Trek", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Carlos Verona", surname:"Verona", team:"Lidl-Trek", nation:"Spagna", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Max Walscheid", surname:"Walscheid", team:"Lidl-Trek", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Albert Withen Philipsen", surname:"Withen Philipsen", team:"Lidl-Trek", nation:"Danimarca", continent:"Europa", age:19, uciPts:0, uciRank:0 },
+  { name:"Toon Aerts", surname:"Aerts", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Huub Artz", surname:"Artz", team:"Lotto-Intermarché", nation:"Olanda", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Jenno Berckmoes", surname:"Berckmoes", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Cédric Beullens", surname:"Beullens", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Vito Braet", surname:"Braet", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Lars Craps", surname:"Craps", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Jasper De Buyst", surname:"De Buyst", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Arnaud De Lie", surname:"De Lie", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:2781, uciRank:11 },
+  { name:"Steffen De Schuyteneer", surname:"De Schuyteneer", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Matthew Fox", surname:"Fox", team:"Lotto-Intermarché", nation:"Australia", continent:"Oceania", age:23, uciPts:0, uciRank:0 },
+  { name:"Joshua Giddings", surname:"Giddings", team:"Lotto-Intermarché", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Sébastien Grignard", surname:"Grignard", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Matys Grisel", surname:"Grisel", team:"Lotto-Intermarché", nation:"Francia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Simone Gualdi", surname:"Gualdi", team:"Lotto-Intermarché", nation:"Italia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Mathieu Kockelmann", surname:"Kockelmann", team:"Lotto-Intermarché", nation:"Lussemburgo", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Milan Menten", surname:"Menten", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Robin Orins", surname:"Orins", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Lorenzo Rota", surname:"Rota", team:"Lotto-Intermarché", nation:"Italia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Jonas Rutsch", surname:"Rutsch", team:"Lotto-Intermarché", nation:"Germania", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Liam Slock", surname:"Slock", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Lionel Taminiaux", surname:"Taminiaux", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Reuben Thompson", surname:"Thompson", team:"Lotto-Intermarché", nation:"Nuova Zelanda", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
+  { name:"Luca Van Boven", surname:"Van Boven", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Taco van der Hoorn", surname:"van der Hoorn", team:"Lotto-Intermarché", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Lennert Van Eetvelt", surname:"Van Eetvelt", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Roel van Sintmaartensdijk", surname:"van Sintmaartensdijk", team:"Lotto-Intermarché", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Baptiste Veistroffer", surname:"Veistroffer", team:"Lotto-Intermarché", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Jarno Widar", surname:"Widar", team:"Lotto-Intermarché", nation:"Belgio", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Georg Zimmermann", surname:"Zimmermann", team:"Lotto-Intermarché", nation:"Germania", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Felix Ørn-Kristoff", surname:"Ørn-Kristoff", team:"Lotto-Intermarché", nation:"Norvegia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Roger Adrià", surname:"Adrià", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Jorge Arcas", surname:"Arcas", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Orluis Aular", surname:"Aular", team:"Movistar Team", nation:"Venezuela", continent:"Sud America", age:29, uciPts:1155, uciRank:65 },
+  { name:"Jon Barrenetxea", surname:"Barrenetxea", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Carlos Canal", surname:"Canal", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Pablo Castrillo", surname:"Castrillo", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Jefferson Cepeda", surname:"Cepeda", team:"Movistar Team", nation:"Ecuador", continent:"Sud America", age:30, uciPts:0, uciRank:0 },
+  { name:"Davide Formolo", surname:"Formolo", team:"Movistar Team", nation:"Italia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Raúl García", surname:"García", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Iván García Cortina", surname:"García Cortina", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Michel Heßmann", surname:"Heßmann", team:"Movistar Team", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Pedro Lopez Juan", surname:"Lopez Juan", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Filip Maciejuk", surname:"Maciejuk", team:"Movistar Team", nation:"Polonia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Enric Mas", surname:"Mas", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:31, uciPts:1021, uciRank:77 },
+  { name:"Lorenzo Milesi", surname:"Milesi", team:"Movistar Team", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Manlio Moro", surname:"Moro", team:"Movistar Team", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Pavel Novak", surname:"Novak", team:"Movistar Team", nation:"Rep. Ceca", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Nelson Oliveira", surname:"Oliveira", team:"Movistar Team", nation:"Portogallo", continent:"Europa", age:37, uciPts:0, uciRank:0 },
+  { name:"Diego Pescador", surname:"Pescador", team:"Movistar Team", nation:"Colombia", continent:"Sud America", age:21, uciPts:0, uciRank:0 },
+  { name:"Nairo Quintana", surname:"Quintana", team:"Movistar Team", nation:"Colombia", continent:"Sud America", age:36, uciPts:0, uciRank:0 },
+  { name:"Iván Romeo", surname:"Romeo", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Javier Romo", surname:"Romo", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:27, uciPts:1089, uciRank:73 },
+  { name:"Einer Rubio", surname:"Rubio", team:"Movistar Team", nation:"Colombia", continent:"Sud America", age:28, uciPts:0, uciRank:0 },
+  { name:"Pelayo Sanchez", surname:"Sanchez", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Gonzalo Serrano", surname:"Serrano", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Natnael Tesfazion", surname:"Tesfazion", team:"Movistar Team", nation:"Eritrea", continent:"Africa", age:26, uciPts:0, uciRank:0 },
+  { name:"Albert Torres", surname:"Torres", team:"Movistar Team", nation:"Spagna", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Cian Uijtdebroeks", surname:"Uijtdebroeks", team:"Movistar Team", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Lewis Askey", surname:"Askey", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"George Bennett", surname:"Bennett", team:"NS CYCLING TEAM", nation:"Nuova Zelanda", continent:"Oceania", age:35, uciPts:0, uciRank:0 },
+  { name:"Joe Blackmore", surname:"Blackmore", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Guillaume Boivin", surname:"Boivin", team:"NS CYCLING TEAM", nation:"Canada", continent:"Nord America", age:36, uciPts:0, uciRank:0 },
+  { name:"Pier-André Côté", surname:"Côté", team:"NS CYCLING TEAM", nation:"Canada", continent:"Nord America", age:28, uciPts:0, uciRank:0 },
+  { name:"Itamar Einhorn", surname:"Einhorn", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Marco Frigo", surname:"Frigo", team:"NS CYCLING TEAM", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Brady Gilmore", surname:"Gilmore", team:"NS CYCLING TEAM", nation:"Australia", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
+  { name:"Biniam Girmay", surname:"Girmay", team:"NS CYCLING TEAM", nation:"Eritrea", continent:"Africa", age:25, uciPts:1646, uciRank:37 },
+  { name:"Jan Hirt", surname:"Hirt", team:"NS CYCLING TEAM", nation:"Rep. Ceca", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Hugo Hofstetter", surname:"Hofstetter", team:"NS CYCLING TEAM", nation:"Francia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Oded Kogut", surname:"Kogut", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Matis Louvel", surname:"Louvel", team:"NS CYCLING TEAM", nation:"Francia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Alexey Lutsenko", surname:"Lutsenko", team:"NS CYCLING TEAM", nation:"Kazakistan", continent:"Asia", age:33, uciPts:0, uciRank:0 },
+  { name:"Pau Martí", surname:"Martí", team:"NS CYCLING TEAM", nation:"Spagna", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Ryan Mullen", surname:"Mullen", team:"NS CYCLING TEAM", nation:"Irlanda", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Krists Neilands", surname:"Neilands", team:"NS CYCLING TEAM", nation:"Lettonia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Alessandro Pinarello", surname:"Pinarello", team:"NS CYCLING TEAM", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Nadav Raisberg", surname:"Raisberg", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Nick Schultz", surname:"Schultz", team:"NS CYCLING TEAM", nation:"Australia", continent:"Oceania", age:31, uciPts:0, uciRank:0 },
+  { name:"Riley Sheehan", surname:"Sheehan", team:"NS CYCLING TEAM", nation:"USA", continent:"Nord America", age:25, uciPts:0, uciRank:0 },
+  { name:"Dion Smith", surname:"Smith", team:"NS CYCLING TEAM", nation:"Nuova Zelanda", continent:"Oceania", age:33, uciPts:0, uciRank:0 },
+  { name:"Jake Stewart", surname:"Stewart", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Corbin Strong", surname:"Strong", team:"NS CYCLING TEAM", nation:"Nuova Zelanda", continent:"Oceania", age:25, uciPts:1450, uciRank:47 },
+  { name:"Rotem Tene", surname:"Tene", team:"NS CYCLING TEAM", nation:"Israele", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Tom Van Asbroeck", surname:"Van Asbroeck", team:"NS CYCLING TEAM", nation:"Belgio", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Floris Van Tricht", surname:"Van Tricht", team:"NS CYCLING TEAM", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Ethan Vernon", surname:"Vernon", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Stephen Williams", surname:"Williams", team:"NS CYCLING TEAM", nation:"Regno Unito", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Giovanni Aleotti", surname:"Aleotti", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Adrien Boichis", surname:"Boichis", team:"Red Bull-BORA-hansgrohe", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Mattia Cattaneo", surname:"Cattaneo", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Nico Denz", surname:"Denz", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Jarrad Drizners", surname:"Drizners", team:"Red Bull-BORA-hansgrohe", nation:"Australia", continent:"Oceania", age:26, uciPts:0, uciRank:0 },
+  { name:"Haimar Etxeberria", surname:"Etxeberria", team:"Red Bull-BORA-hansgrohe", nation:"Spagna", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Remco Evenepoel", surname:"Evenepoel", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:26, uciPts:4118, uciRank:6 },
+  { name:"Finn Fisher-Black", surname:"Fisher-Black", team:"Red Bull-BORA-hansgrohe", nation:"Nuova Zelanda", continent:"Oceania", age:24, uciPts:0, uciRank:0 },
+  { name:"Alexander Hajek", surname:"Hajek", team:"Red Bull-BORA-hansgrohe", nation:"Austria", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Emil Herzog", surname:"Herzog", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Jai Hindley", surname:"Hindley", team:"Red Bull-BORA-hansgrohe", nation:"Australia", continent:"Oceania", age:29, uciPts:1540, uciRank:42 },
+  { name:"Florian Lipowitz", surname:"Lipowitz", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:25, uciPts:2552, uciRank:15 },
+  { name:"Arne Marit", surname:"Marit", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Daniel Martinez", surname:"Martinez", team:"Red Bull-BORA-hansgrohe", nation:"Colombia", continent:"Sud America", age:29, uciPts:0, uciRank:0 },
+  { name:"Jordi Meeus", surname:"Meeus", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:27, uciPts:1235, uciRank:59 },
+  { name:"Gianni Moscon", surname:"Moscon", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Giulio Pellizzari", surname:"Pellizzari", team:"Red Bull-BORA-hansgrohe", nation:"Italia", continent:"Europa", age:22, uciPts:1473, uciRank:45 },
+  { name:"Laurence Pithie", surname:"Pithie", team:"Red Bull-BORA-hansgrohe", nation:"Nuova Zelanda", continent:"Oceania", age:23, uciPts:0, uciRank:0 },
+  { name:"Primoz Roglic", surname:"Roglic", team:"Red Bull-BORA-hansgrohe", nation:"Slovenia", continent:"Europa", age:36, uciPts:1856, uciRank:32 },
+  { name:"Callum Thornley", surname:"Thornley", team:"Red Bull-BORA-hansgrohe", nation:"Regno Unito", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Jan Tratnik", surname:"Tratnik", team:"Red Bull-BORA-hansgrohe", nation:"Slovenia", continent:"Europa", age:36, uciPts:0, uciRank:0 },
+  { name:"Luke Tuckwell", surname:"Tuckwell", team:"Red Bull-BORA-hansgrohe", nation:"Australia", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
+  { name:"Mick van Dijke", surname:"van Dijke", team:"Red Bull-BORA-hansgrohe", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Tim van Dijke", surname:"van Dijke", team:"Red Bull-BORA-hansgrohe", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Maxim Van Gils", surname:"Van Gils", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Danny van Poppel", surname:"van Poppel", team:"Red Bull-BORA-hansgrohe", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Gianni Vermeersch", surname:"Vermeersch", team:"Red Bull-BORA-hansgrohe", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Aleksandr Vlasov", surname:"Vlasov", team:"Red Bull-BORA-hansgrohe", nation:"Russia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Frederik Wandahl", surname:"Wandahl", team:"Red Bull-BORA-hansgrohe", nation:"Danimarca", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Ben Zwiehoff", surname:"Zwiehoff", team:"Red Bull-BORA-hansgrohe", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Ayco Bastiaens", surname:"Bastiaens", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Steff Cras", surname:"Cras", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Alberto Dainese", surname:"Dainese", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Pascal Eenkhoorn", surname:"Eenkhoorn", team:"Soudal Quick-Step", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Gianmarco Garofoli", surname:"Garofoli", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Gil Gelders", surname:"Gelders", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Ethan Hayter", surname:"Hayter", team:"Soudal Quick-Step", nation:"Regno Unito", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Yves Lampaert", surname:"Lampaert", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Mikel Landa", surname:"Landa", team:"Soudal Quick-Step", nation:"Spagna", continent:"Europa", age:36, uciPts:0, uciRank:0 },
+  { name:"Junior Lecerf", surname:"Lecerf", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Paul Magnier", surname:"Magnier", team:"Soudal Quick-Step", nation:"Francia", continent:"Europa", age:21, uciPts:2327, uciRank:19 },
+  { name:"Tim Merlier", surname:"Merlier", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:33, uciPts:1951, uciRank:30 },
+  { name:"Valentin Paret-Peintre", surname:"Paret-Peintre", team:"Soudal Quick-Step", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Casper Pedersen", surname:"Pedersen", team:"Soudal Quick-Step", nation:"Danimarca", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Andrea Raccagni Noviero", surname:"Raccagni Noviero", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Pepijn Reinderink", surname:"Reinderink", team:"Soudal Quick-Step", nation:"Olanda", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Laurenz Rex", surname:"Rex", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Max Schachmann", surname:"Schachmann", team:"Soudal Quick-Step", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Jasper Stuyven", surname:"Stuyven", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Martin Svrcek", surname:"Svrcek", team:"Soudal Quick-Step", nation:"Slovacchia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Dylan van Baarle", surname:"van Baarle", team:"Soudal Quick-Step", nation:"Olanda", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Fabio Van den Bossche", surname:"Van den Bossche", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Dries van Gestel", surname:"van Gestel", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Bert Van Lerberghe", surname:"Van Lerberghe", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Ilan Van Wilder", surname:"Van Wilder", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:25, uciPts:947, uciRank:88 },
+  { name:"Warre Vangheluwe", surname:"Vangheluwe", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Mauri Vansevenant", surname:"Vansevenant", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Louis Vervaeke", surname:"Vervaeke", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Jonathan Vervenne", surname:"Vervenne", team:"Soudal Quick-Step", nation:"Belgio", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Filippo Zana", surname:"Zana", team:"Soudal Quick-Step", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Pascal Ackermann", surname:"Ackermann", team:"Team Jayco-AlUla", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Koen Bouwman", surname:"Bouwman", team:"Team Jayco-AlUla", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Amaury Capiot", surname:"Capiot", team:"Team Jayco-AlUla", nation:"Belgio", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Filippo Conca", surname:"Conca", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Alessandro Covi", surname:"Covi", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Dries De Bondt", surname:"De Bondt", team:"Team Jayco-AlUla", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Dries De Pooter", surname:"De Pooter", team:"Team Jayco-AlUla", nation:"Belgio", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Davide De Pretto", surname:"De Pretto", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Robert Donaldson", surname:"Donaldson", team:"Team Jayco-AlUla", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Paul Double", surname:"Double", team:"Team Jayco-AlUla", nation:"Regno Unito", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Luke Durbridge", surname:"Durbridge", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:34, uciPts:0, uciRank:0 },
+  { name:"Felix Engelhardt", surname:"Engelhardt", team:"Team Jayco-AlUla", nation:"Germania", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Anders Foldager", surname:"Foldager", team:"Team Jayco-AlUla", nation:"Danimarca", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Patrick Gamper", surname:"Gamper", team:"Team Jayco-AlUla", nation:"Austria", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Alan Hatherly", surname:"Hatherly", team:"Team Jayco-AlUla", nation:"Sudafrica", continent:"Africa", age:30, uciPts:0, uciRank:0 },
+  { name:"Asbjørn Hellemose", surname:"Hellemose", team:"Team Jayco-AlUla", nation:"Danimarca", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Christopher Juul-Jensen", surname:"Juul-Jensen", team:"Team Jayco-AlUla", nation:"Danimarca", continent:"Europa", age:36, uciPts:0, uciRank:0 },
+  { name:"Jelte Krijnsen", surname:"Krijnsen", team:"Team Jayco-AlUla", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Michael Matthews", surname:"Matthews", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:35, uciPts:1780, uciRank:35 },
+  { name:"Hamish McKenzie", surname:"McKenzie", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:21, uciPts:0, uciRank:0 },
+  { name:"Luka Mezgec", surname:"Mezgec", team:"Team Jayco-AlUla", nation:"Slovenia", continent:"Europa", age:37, uciPts:0, uciRank:0 },
+  { name:"Kelland O'Brien", surname:"O'Brien", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:27, uciPts:0, uciRank:0 },
+  { name:"Ben O'Connor", surname:"O'Connor", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:30, uciPts:944, uciRank:89 },
+  { name:"Finlay Pickering", surname:"Pickering", team:"Team Jayco-AlUla", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Luke Plapp", surname:"Plapp", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:25, uciPts:997, uciRank:81 },
+  { name:"Rudy Porter", surname:"Porter", team:"Team Jayco-AlUla", nation:"Australia", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
+  { name:"Mauro Schmid", surname:"Schmid", team:"Team Jayco-AlUla", nation:"Svizzera", continent:"Europa", age:26, uciPts:1193, uciRank:61 },
+  { name:"Jasha Sütterlin", surname:"Sütterlin", team:"Team Jayco-AlUla", nation:"Germania", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Andrea Vendrame", surname:"Vendrame", team:"Team Jayco-AlUla", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Warren Barguil", surname:"Barguil", team:"Team Picnic PostNL", nation:"Francia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Frits Biesterbos", surname:"Biesterbos", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Pavel Bittner", surname:"Bittner", team:"Team Picnic PostNL", nation:"Rep. Ceca", continent:"Europa", age:23, uciPts:1126, uciRank:68 },
+  { name:"Dillon Corkery", surname:"Corkery", team:"Team Picnic PostNL", nation:"Irlanda", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Timo de Jong", surname:"de Jong", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"John Degenkolb", surname:"Degenkolb", team:"Team Picnic PostNL", nation:"Germania", continent:"Europa", age:37, uciPts:0, uciRank:0 },
+  { name:"Robbe Dhondt", surname:"Dhondt", team:"Team Picnic PostNL", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Matthew Dinham", surname:"Dinham", team:"Team Picnic PostNL", nation:"Australia", continent:"Oceania", age:25, uciPts:0, uciRank:0 },
+  { name:"Nils Eekhoff", surname:"Eekhoff", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Alexy Faure-Prost", surname:"Faure-Prost", team:"Team Picnic PostNL", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Sean Flynn", surname:"Flynn", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Mattia Gaffuri", surname:"Gaffuri", team:"Team Picnic PostNL", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Chris Hamilton", surname:"Hamilton", team:"Team Picnic PostNL", nation:"Australia", continent:"Oceania", age:30, uciPts:0, uciRank:0 },
+  { name:"Henri-Francois Haquin", surname:"Haquin", team:"Team Picnic PostNL", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Fabio Jakobsen", surname:"Jakobsen", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"James Knox", surname:"Knox", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Bjoern Koerdt", surname:"Koerdt", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Gijs Leemreize", surname:"Leemreize", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Juan Martinez", surname:"Martinez", team:"Team Picnic PostNL", nation:"Colombia", continent:"Sud America", age:21, uciPts:0, uciRank:0 },
+  { name:"Niklas Märkl", surname:"Märkl", team:"Team Picnic PostNL", nation:"Germania", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Tim Naberman", surname:"Naberman", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Oliver Peace", surname:"Peace", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Max Poole", surname:"Poole", team:"Team Picnic PostNL", nation:"Regno Unito", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Timo Roosen", surname:"Roosen", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Julius van den Berg", surname:"van den Berg", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Frank van den Broek", surname:"van den Broek", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Casper van Uden", surname:"van Uden", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Bram Welten", surname:"Welten", team:"Team Picnic PostNL", nation:"Olanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Edoardo Affini", surname:"Affini", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Bruno Armirail", surname:"Armirail", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Louis Barré", surname:"Barré", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Niklas Behrens", surname:"Behrens", team:"Team Visma | Lease a Bike", nation:"Germania", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Matthew Brennan", surname:"Brennan", team:"Team Visma | Lease a Bike", nation:"Regno Unito", continent:"Europa", age:20, uciPts:1507, uciRank:43 },
+  { name:"Victor Campenaerts", surname:"Campenaerts", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Owain Doull", surname:"Doull", team:"Team Visma | Lease a Bike", nation:"Regno Unito", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Filippo Fiorelli", surname:"Fiorelli", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Tijmen Graat", surname:"Graat", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Strand Hagenes Per", surname:"Hagenes Per", team:"Team Visma | Lease a Bike", nation:"Norvegia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Menno Huising", surname:"Huising", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Matteo Jorgenson", surname:"Jorgenson", team:"Team Visma | Lease a Bike", nation:"USA", continent:"Nord America", age:26, uciPts:1962, uciRank:29 },
+  { name:"Wilco Kelderman", surname:"Kelderman", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Timo Kielich", surname:"Kielich", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Steven Kruijswijk", surname:"Kruijswijk", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:38, uciPts:0, uciRank:0 },
+  { name:"Sepp Kuss", surname:"Kuss", team:"Team Visma | Lease a Bike", nation:"USA", continent:"Nord America", age:31, uciPts:861, uciRank:97 },
+  { name:"Christophe Laporte", surname:"Laporte", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Bart Lemmen", surname:"Lemmen", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Pietro Mattio", surname:"Mattio", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Jørgen Nordhagen", surname:"Nordhagen", team:"Team Visma | Lease a Bike", nation:"Norvegia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Davide Piganzoli", surname:"Piganzoli", team:"Team Visma | Lease a Bike", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Tim Rex", surname:"Rex", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Anton Schiffer", surname:"Schiffer", team:"Team Visma | Lease a Bike", nation:"Germania", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Ben Tulett", surname:"Tulett", team:"Team Visma | Lease a Bike", nation:"Regno Unito", continent:"Europa", age:24, uciPts:990, uciRank:82 },
+  { name:"Wout van Aert", surname:"van Aert", team:"Team Visma | Lease a Bike", nation:"Belgio", continent:"Europa", age:31, uciPts:2908, uciRank:10 },
+  { name:"Loe van Belle", surname:"van Belle", team:"Team Visma | Lease a Bike", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Jonas Vingegaard", surname:"Vingegaard", team:"Team Visma | Lease a Bike", nation:"Danimarca", continent:"Europa", age:29, uciPts:5944, uciRank:2 },
+  { name:"Axel Zingle", surname:"Zingle", team:"Team Visma | Lease a Bike", nation:"Francia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"João Almeida", surname:"Almeida", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:27, uciPts:4331, uciRank:5 },
+  { name:"Igor Arrieta", surname:"Arrieta", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Filippo Baroncini", surname:"Baroncini", team:"UAE Team Emirates-XRG", nation:"Italia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Mikkel Bjerg", surname:"Bjerg", team:"UAE Team Emirates-XRG", nation:"Danimarca", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Jan Christen", surname:"Christen", team:"UAE Team Emirates-XRG", nation:"Svizzera", continent:"Europa", age:21, uciPts:1347, uciRank:52 },
+  { name:"Benoît Cosnefroy", surname:"Cosnefroy", team:"UAE Team Emirates-XRG", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Isaac del Toro", surname:"del Toro", team:"UAE Team Emirates-XRG", nation:"Messico", continent:"Nord America", age:22, uciPts:5514, uciRank:3 },
+  { name:"Luca Giaimi", surname:"Giaimi", team:"UAE Team Emirates-XRG", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Felix Großschartner", surname:"Großschartner", team:"UAE Team Emirates-XRG", nation:"Austria", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Rune Herregodts", surname:"Herregodts", team:"UAE Team Emirates-XRG", nation:"Belgio", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Julius Johansen", surname:"Johansen", team:"UAE Team Emirates-XRG", nation:"Danimarca", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Stake Laengen Vegard", surname:"Laengen Vegard", team:"UAE Team Emirates-XRG", nation:"Norvegia", continent:"Europa", age:37, uciPts:0, uciRank:0 },
+  { name:"Brandon McNulty", surname:"McNulty", team:"UAE Team Emirates-XRG", nation:"USA", continent:"Nord America", age:27, uciPts:2153, uciRank:23 },
+  { name:"Sebastian Molano", surname:"Molano", team:"UAE Team Emirates-XRG", nation:"Colombia", continent:"Sud America", age:31, uciPts:0, uciRank:0 },
+  { name:"António Morgado", surname:"Morgado", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:22, uciPts:985, uciRank:84 },
+  { name:"Jhonatan Narvaez", surname:"Narvaez", team:"UAE Team Emirates-XRG", nation:"Ecuador", continent:"Sud America", age:29, uciPts:1497, uciRank:44 },
+  { name:"Domen Novak", surname:"Novak", team:"UAE Team Emirates-XRG", nation:"Slovenia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Ivo Oliveira", surname:"Oliveira", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Rui Oliveira", surname:"Oliveira", team:"UAE Team Emirates-XRG", nation:"Portogallo", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Adria Pericas", surname:"Pericas", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:19, uciPts:0, uciRank:0 },
+  { name:"Tadej Pogacar", surname:"Pogacar", team:"UAE Team Emirates-XRG", nation:"Slovenia", continent:"Europa", age:27, uciPts:11680, uciRank:1 },
+  { name:"Nils Politt", surname:"Politt", team:"UAE Team Emirates-XRG", nation:"Germania", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Pavel Sivakov", surname:"Sivakov", team:"UAE Team Emirates-XRG", nation:"Francia", continent:"Europa", age:28, uciPts:1155, uciRank:64 },
+  { name:"Marc Soler", surname:"Soler", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Pablo Torres", surname:"Torres", team:"UAE Team Emirates-XRG", nation:"Spagna", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Kevin Vermaerke", surname:"Vermaerke", team:"UAE Team Emirates-XRG", nation:"USA", continent:"Nord America", age:25, uciPts:0, uciRank:0 },
+  { name:"Florian Vermeersch", surname:"Vermeersch", team:"UAE Team Emirates-XRG", nation:"Belgio", continent:"Europa", age:27, uciPts:1015, uciRank:79 },
+  { name:"Jay Vine", surname:"Vine", team:"UAE Team Emirates-XRG", nation:"Australia", continent:"Oceania", age:30, uciPts:2320, uciRank:20 },
+  { name:"Tim Wellens", surname:"Wellens", team:"UAE Team Emirates-XRG", nation:"Belgio", continent:"Europa", age:34, uciPts:1250, uciRank:58 },
+  { name:"Adam Yates", surname:"Yates", team:"UAE Team Emirates-XRG", nation:"Regno Unito", continent:"Europa", age:33, uciPts:1322, uciRank:53 },
+  { name:"Jonas Abrahamsen", surname:"Abrahamsen", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:30, uciPts:989, uciRank:83 },
+  { name:"Carl-Frederik Bevort", surname:"Bevort", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Erlend Blikra", surname:"Blikra", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"William Blume Levy", surname:"Blume Levy", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Urianstad Bugge Martin", surname:"Bugge Martin", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Erik Bystrøm Sven", surname:"Bystrøm Sven", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Anthon Charmig", surname:"Charmig", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Magnus Cort", surname:"Cort", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Simon Dalby", surname:"Dalby", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Fredrik Dversnes", surname:"Dversnes", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Stian Fredheim", surname:"Fredheim", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Markus Hoelgaard", surname:"Hoelgaard", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Ådne Holter", surname:"Holter", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Hem Hvideberg Jonas", surname:"Hvideberg Jonas", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Storm Ingebrigtsen", surname:"Ingebrigtsen", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Halland Johannessen Anders", surname:"Johannessen Anders", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:1441, uciRank:50 },
+  { name:"Halland Johannessen Tobias", surname:"Johannessen Tobias", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:1441, uciRank:50 },
+  { name:"Alexander Kamp", surname:"Kamp", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Andreas Kron", surname:"Kron", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Johannes Kulset", surname:"Kulset", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Andreas Leknessund", surname:"Leknessund", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Koller Løland Sakarias", surname:"Løland Sakarias", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Henrik Pedersen", surname:"Pedersen", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Erik Resell", surname:"Resell", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Anders Skaarseth", surname:"Skaarseth", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Tobias Svarre", surname:"Svarre", team:"Uno-X Mobility", nation:"Danimarca", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Rasmus Tiller", surname:"Tiller", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Martin Tjøtta", surname:"Tjøtta", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Torstein Træen", surname:"Træen", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Søren Wærenskjold", surname:"Wærenskjold", team:"Uno-X Mobility", nation:"Norvegia", continent:"Europa", age:26, uciPts:1183, uciRank:62 },
+  { name:"Davide Ballerini", surname:"Ballerini", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Alberto Bettiol", surname:"Bettiol", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Clément Champoussin", surname:"Champoussin", team:"XDS Astana Team", nation:"Francia", continent:"Europa", age:27, uciPts:957, uciRank:86 },
+  { name:"Nicola Conci", surname:"Conci", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Yevgeniy Fedorov", surname:"Fedorov", team:"XDS Astana Team", nation:"Kazakistan", continent:"Asia", age:26, uciPts:0, uciRank:0 },
+  { name:"Lorenzo Fortunato", surname:"Fortunato", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:29, uciPts:1447, uciRank:48 },
+  { name:"Aaron Gate", surname:"Gate", team:"XDS Astana Team", nation:"Nuova Zelanda", continent:"Oceania", age:35, uciPts:0, uciRank:0 },
+  { name:"Lev Gonov", surname:"Gonov", team:"XDS Astana Team", nation:"Russia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Sergio Higuita", surname:"Higuita", team:"XDS Astana Team", nation:"Colombia", continent:"Sud America", age:28, uciPts:0, uciRank:0 },
+  { name:"Florian Kajamini", surname:"Kajamini", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Max Kanter", surname:"Kanter", team:"XDS Astana Team", nation:"Germania", continent:"Europa", age:28, uciPts:1004, uciRank:80 },
+  { name:"Anton Kuzmin", surname:"Kuzmin", team:"XDS Astana Team", nation:"Kazakistan", continent:"Asia", age:29, uciPts:0, uciRank:0 },
+  { name:"Arjen Livyns", surname:"Livyns", team:"XDS Astana Team", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Martin López", surname:"López", team:"XDS Astana Team", nation:"Ecuador", continent:"Sud America", age:25, uciPts:869, uciRank:96 },
+  { name:"Matteo Malucelli", surname:"Malucelli", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Henok Mulubrhan", surname:"Mulubrhan", team:"XDS Astana Team", nation:"Eritrea", continent:"Africa", age:26, uciPts:983, uciRank:85 },
+  { name:"Cristian Rodriguez", surname:"Rodriguez", team:"XDS Astana Team", nation:"Spagna", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Alessandro Romele", surname:"Romele", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Christian Scaroni", surname:"Scaroni", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:28, uciPts:2399, uciRank:18 },
+  { name:"Marco Schrettl", surname:"Schrettl", team:"XDS Astana Team", nation:"Austria", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Thomas Silva", surname:"Silva", team:"XDS Astana Team", nation:"Uruguay", continent:"Sud America", age:24, uciPts:913, uciRank:91 },
+  { name:"Haoyu Su", surname:"Su", team:"XDS Astana Team", nation:"Cina", continent:"Asia", age:25, uciPts:0, uciRank:0 },
+  { name:"Gleb Syritsa", surname:"Syritsa", team:"XDS Astana Team", nation:"Russia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Harold Tejada", surname:"Tejada", team:"XDS Astana Team", nation:"Colombia", continent:"Sud America", age:28, uciPts:0, uciRank:0 },
+  { name:"Mike Teunissen", surname:"Teunissen", team:"XDS Astana Team", nation:"Olanda", continent:"Europa", age:33, uciPts:846, uciRank:98 },
+  { name:"Davide Toneatti", surname:"Toneatti", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Diego Ulissi", surname:"Ulissi", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:36, uciPts:957, uciRank:86 },
+  { name:"Darren van Bekkum", surname:"van Bekkum", team:"XDS Astana Team", nation:"Olanda", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Simone Velasco", surname:"Velasco", team:"XDS Astana Team", nation:"Italia", continent:"Europa", age:30, uciPts:1464, uciRank:46 },
+  { name:"Nicolas Vinokurov", surname:"Vinokurov", team:"XDS Astana Team", nation:"Kazakistan", continent:"Asia", age:23, uciPts:0, uciRank:0 },
+  { name:"Xabier Azparren", surname:"Azparren", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Matteo Badilatti", surname:"Badilatti", team:"Pinarello Q36.5", nation:"Svizzera", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Sjoerd Bax", surname:"Bax", team:"Pinarello Q36.5", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Sam Bennett", surname:"Bennett", team:"Pinarello Q36.5", nation:"Irlanda", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Walter Calzoni", surname:"Calzoni", team:"Pinarello Q36.5", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Marcel Camprubí", surname:"Camprubí", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Fabio Christen", surname:"Christen", team:"Pinarello Q36.5", nation:"Svizzera", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Aimé De Gendt", surname:"De Gendt", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"David de la Cruz", surname:"de la Cruz", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:36, uciPts:0, uciRank:0 },
+  { name:"Mark Donovan", surname:"Donovan", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Edward Dunbar", surname:"Dunbar", team:"Pinarello Q36.5", nation:"Irlanda", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Frederik Frison", surname:"Frison", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Thomas Gloag", surname:"Gloag", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"David González", surname:"González", team:"Pinarello Q36.5", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Chris Harper", surname:"Harper", team:"Pinarello Q36.5", nation:"Australia", continent:"Oceania", age:31, uciPts:0, uciRank:0 },
+  { name:"Quinten Hermans", surname:"Hermans", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Emmanuel Houcou", surname:"Houcou", team:"Pinarello Q36.5", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Damien Howson", surname:"Howson", team:"Pinarello Q36.5", nation:"Australia", continent:"Oceania", age:33, uciPts:0, uciRank:0 },
+  { name:"Emils Liepins", surname:"Liepins", team:"Pinarello Q36.5", nation:"Lettonia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Kamil Malecki", surname:"Malecki", team:"Pinarello Q36.5", nation:"Polonia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Xandro Meurisse", surname:"Meurisse", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Matteo Moschetti", surname:"Moschetti", team:"Pinarello Q36.5", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Nicolò Parisini", surname:"Parisini", team:"Pinarello Q36.5", nation:"Italia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Joseph Pidcock", surname:"Pidcock", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Tom Pidcock", surname:"Pidcock", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:26, uciPts:3904, uciRank:7 },
+  { name:"Milan Vader", surname:"Vader", team:"Pinarello Q36.5", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Brent Van Moer", surname:"Van Moer", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Harm Vanhoucke", surname:"Vanhoucke", team:"Pinarello Q36.5", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Fred Wright", surname:"Wright", team:"Pinarello Q36.5", nation:"Regno Unito", continent:"Europa", age:26, uciPts:1093, uciRank:71 },
+  { name:"Nickolas Zukowsky", surname:"Zukowsky", team:"Pinarello Q36.5", nation:"Canada", continent:"Nord America", age:27, uciPts:0, uciRank:0 },
+  { name:"Julian Alaphilippe", surname:"Alaphilippe", team:"Tudor Pro Cycling Team", nation:"Francia", continent:"Europa", age:33, uciPts:1446, uciRank:49 },
+  { name:"William Barta", surname:"Barta", team:"Tudor Pro Cycling Team", nation:"USA", continent:"Nord America", age:30, uciPts:0, uciRank:0 },
+  { name:"Marco Brenner", surname:"Brenner", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Arvid de Kleijn", surname:"de Kleijn", team:"Tudor Pro Cycling Team", nation:"Olanda", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Robin Donzé", surname:"Donzé", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Jacob Eriksson", surname:"Eriksson", team:"Tudor Pro Cycling Team", nation:"Svezia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Robin Froidevaux", surname:"Froidevaux", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Marco Haller", surname:"Haller", team:"Tudor Pro Cycling Team", nation:"Austria", continent:"Europa", age:35, uciPts:0, uciRank:0 },
+  { name:"Marc Hirschi", surname:"Hirschi", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:1262, uciRank:56 },
+  { name:"Petr Kelemen", surname:"Kelemen", team:"Tudor Pro Cycling Team", nation:"Rep. Ceca", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Arthur Kluckers", surname:"Kluckers", team:"Tudor Pro Cycling Team", nation:"Lussemburgo", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Sebastian Kolze Changizi", surname:"Kolze Changizi", team:"Tudor Pro Cycling Team", nation:"Danimarca", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Stefan Küng", surname:"Küng", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Fabian Lienhard", surname:"Lienhard", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Marius Mayrhofer", surname:"Mayrhofer", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Aivaras Mikutis", surname:"Mikutis", team:"Tudor Pro Cycling Team", nation:"Lituania", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Luca Mozzato", surname:"Mozzato", team:"Tudor Pro Cycling Team", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Rick Pluimers", surname:"Pluimers", team:"Tudor Pro Cycling Team", nation:"Olanda", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Mathys Rondel", surname:"Rondel", team:"Tudor Pro Cycling Team", nation:"Francia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Michael Storer", surname:"Storer", team:"Tudor Pro Cycling Team", nation:"Australia", continent:"Oceania", age:29, uciPts:2083, uciRank:27 },
+  { name:"Florian Stork", surname:"Stork", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Joel Suter", surname:"Suter", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Roland Thalmann", surname:"Thalmann", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:32, uciPts:0, uciRank:0 },
+  { name:"Matteo Trentin", surname:"Trentin", team:"Tudor Pro Cycling Team", nation:"Italia", continent:"Europa", age:36, uciPts:890, uciRank:94 },
+  { name:"Yannis Voisard", surname:"Voisard", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Lawrence Warbasse", surname:"Warbasse", team:"Tudor Pro Cycling Team", nation:"USA", continent:"Nord America", age:35, uciPts:0, uciRank:0 },
+  { name:"Fabian Weiss", surname:"Weiss", team:"Tudor Pro Cycling Team", nation:"Svizzera", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Hannes Wilksch", surname:"Wilksch", team:"Tudor Pro Cycling Team", nation:"Germania", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Luc Wirtgen", surname:"Wirtgen", team:"Tudor Pro Cycling Team", nation:"Lussemburgo", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Maikel Zijlaard", surname:"Zijlaard", team:"Tudor Pro Cycling Team", nation:"Olanda", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Davide Bais", surname:"Bais", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Mattia Bais", surname:"Bais", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Dario Belletta", surname:"Belletta", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Adrián Benito", surname:"Benito", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Gabriele Bessega", surname:"Bessega", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Tommaso Bessega", surname:"Bessega", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Aidan Buttigieg", surname:"Buttigieg", team:"Team Polti VisitMalta", nation:"Malta", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Ludovico Crescioli", surname:"Crescioli", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Fabrizio Crozzolo", surname:"Crozzolo", team:"Team Polti VisitMalta", nation:"Argentina", continent:"Sud America", age:21, uciPts:0, uciRank:0 },
+  { name:"Pablo Garcia", surname:"Garcia", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Dario Giuliano", surname:"Giuliano", team:"Team Polti VisitMalta", nation:"Francia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Dario Gómez Germán", surname:"Gómez Germán", team:"Team Polti VisitMalta", nation:"Colombia", continent:"Sud America", age:25, uciPts:0, uciRank:0 },
+  { name:"Giovanni Lonardi", surname:"Lonardi", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Mirco Maestri", surname:"Maestri", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Andrea Mifsud", surname:"Mifsud", team:"Team Polti VisitMalta", nation:"Malta", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Francisco Muñoz", surname:"Muñoz", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Manuel Peñalver", surname:"Peñalver", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Thomas Pesenti", surname:"Pesenti", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Andrea Pietrobon", surname:"Pietrobon", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Gabriele Raccagni", surname:"Raccagni", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Javier Serrano", surname:"Serrano", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Diego Sevilla", surname:"Sevilla", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Fernando Tercero", surname:"Tercero", team:"Team Polti VisitMalta", nation:"Spagna", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Alessandro Tonelli", surname:"Tonelli", team:"Team Polti VisitMalta", nation:"Italia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Piet Allegaert", surname:"Allegaert", team:"Cofidis", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Stanislaw Aniolkowski", surname:"Aniolkowski", team:"Cofidis", nation:"Polonia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Alex Aranburu", surname:"Aranburu", team:"Cofidis", nation:"Spagna", continent:"Europa", age:30, uciPts:1167, uciRank:63 },
+  { name:"Jenthe Biermans", surname:"Biermans", team:"Cofidis", nation:"Belgio", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Emanuel Buchmann", surname:"Buchmann", team:"Cofidis", nation:"Germania", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Simon Carr", surname:"Carr", team:"Cofidis", nation:"Regno Unito", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Camille Charret", surname:"Charret", team:"Cofidis", nation:"Francia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
+  { name:"Bryan Coquard", surname:"Coquard", team:"Cofidis", nation:"Francia", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Nicolas Debeaumarché", surname:"Debeaumarché", team:"Cofidis", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Valentin Ferron", surname:"Ferron", team:"Cofidis", nation:"Francia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Milan Fretin", surname:"Fretin", team:"Cofidis", nation:"Belgio", continent:"Europa", age:25, uciPts:1130, uciRank:66 },
+  { name:"Ion Izagirre", surname:"Izagirre", team:"Cofidis", nation:"Spagna", continent:"Europa", age:37, uciPts:0, uciRank:0 },
+  { name:"Clement Izquierdo", surname:"Izquierdo", team:"Cofidis", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Yaël Joalland", surname:"Joalland", team:"Cofidis", nation:"Francia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Alex Kirsch", surname:"Kirsch", team:"Cofidis", nation:"Lussemburgo", continent:"Europa", age:33, uciPts:0, uciRank:0 },
+  { name:"Oliver Knight", surname:"Knight", team:"Cofidis", nation:"Regno Unito", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Jan Maas", surname:"Maas", team:"Cofidis", nation:"Olanda", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Sam Maisonobe", surname:"Maisonobe", team:"Cofidis", nation:"Francia", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Jamie Meehan", surname:"Meehan", team:"Cofidis", nation:"Irlanda", continent:"Europa", age:22, uciPts:0, uciRank:0 },
+  { name:"Sylvain Moniquet", surname:"Moniquet", team:"Cofidis", nation:"Belgio", continent:"Europa", age:28, uciPts:0, uciRank:0 },
+  { name:"Paul Ourselin", surname:"Ourselin", team:"Cofidis", nation:"Francia", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Hugo Page", surname:"Page", team:"Cofidis", nation:"Francia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Alexis Renard", surname:"Renard", team:"Cofidis", nation:"Francia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Ludovic Robeet", surname:"Robeet", team:"Cofidis", nation:"Belgio", continent:"Europa", age:31, uciPts:0, uciRank:0 },
+  { name:"Louis Rouland", surname:"Rouland", team:"Cofidis", nation:"Francia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Sergio Samitier", surname:"Samitier", team:"Cofidis", nation:"Spagna", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Dylan Teuns", surname:"Teuns", team:"Cofidis", nation:"Belgio", continent:"Europa", age:34, uciPts:0, uciRank:0 },
+  { name:"Benjamin Thomas", surname:"Thomas", team:"Cofidis", nation:"Francia", continent:"Europa", age:30, uciPts:0, uciRank:0 },
+  { name:"Damien Touzé", surname:"Touzé", team:"Cofidis", nation:"Francia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Edoardo Zamperini", surname:"Zamperini", team:"Cofidis", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Filippo Cettolin", surname:"Cettolin", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
+  { name:"Luca Colnaghi", surname:"Colnaghi", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Lorenzo Conforti", surname:"Conforti", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Luca Covili", surname:"Covili", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:29, uciPts:0, uciRank:0 },
+  { name:"Edward Cruz Martínez", surname:"Cruz Martínez", team:"Bardiani-CSF", nation:"Colombia", continent:"Sud America", age:19, uciPts:0, uciRank:0 },
+  { name:"Santiago Ferraro", surname:"Ferraro", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
+  { name:"Martín Herreño", surname:"Herreño", team:"Bardiani-CSF", nation:"Colombia", continent:"Sud America", age:19, uciPts:0, uciRank:0 },
+  { name:"Filippo Magli", surname:"Magli", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Marco Manenti", surname:"Manenti", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:23, uciPts:0, uciRank:0 },
+  { name:"Martin Marcellusi", surname:"Marcellusi", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:25, uciPts:0, uciRank:0 },
+  { name:"Alessio Martinelli", surname:"Martinelli", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Andrea Montagner", surname:"Montagner", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Luca Paletti", surname:"Paletti", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:21, uciPts:0, uciRank:0 },
+  { name:"Mattia Pinazzi", surname:"Pinazzi", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:24, uciPts:0, uciRank:0 },
+  { name:"Vicente Rojas", surname:"Rojas", team:"Bardiani-CSF", nation:"Cile", continent:"Sud America", age:23, uciPts:0, uciRank:0 },
+  { name:"Sergei Rostovtsev", surname:"Rostovtsev", team:"Bardiani-CSF", nation:"Uzbekistan", continent:"Asia", age:28, uciPts:0, uciRank:0 },
+  { name:"Mattia Stenico", surname:"Stenico", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:19, uciPts:0, uciRank:0 },
+  { name:"Manuele Tarozzi", surname:"Tarozzi", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:27, uciPts:0, uciRank:0 },
+  { name:"Alex Tolio", surname:"Tolio", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:26, uciPts:0, uciRank:0 },
+  { name:"Nikita Tsvetkov", surname:"Tsvetkov", team:"Bardiani-CSF", nation:"Uzbekistan", continent:"Asia", age:21, uciPts:0, uciRank:0 },
+  { name:"Filippo Turconi", surname:"Turconi", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:20, uciPts:0, uciRank:0 },
+  { name:"Matteo Turconi", surname:"Turconi", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:18, uciPts:0, uciRank:0 },
+  { name:"Enrico Zanoncello", surname:"Zanoncello", team:"Bardiani-CSF", nation:"Italia", continent:"Europa", age:28, uciPts:0, uciRank:0 },
 ];
 
 // ── CARRIERE ────────────────────────────────────────────────────────────
@@ -1007,6 +1007,120 @@ function ShareButton({text}){
   </button>);
 }
 
+// ── HELP MODAL ──────────────────────────────────────────────────────────
+function HelpModal({open,onClose,title,children}){
+  if(!open)return null;
+  return(<div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:999,padding:"16px"}} onClick={onClose}>
+    <div style={{background:"#fff",borderRadius:"10px",maxWidth:"360px",width:"100%",maxHeight:"80vh",overflow:"auto",boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
+      <div style={{background:US.black,color:"#fff",padding:"14px 16px",borderBottom:`3px solid ${US.orange}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <div>
+          <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"}}>Come si gioca</div>
+          <div style={{fontSize:"15px",fontWeight:"700"}}>{title}</div>
+        </div>
+        <button onClick={onClose} style={{background:"none",border:"none",color:"#fff",fontSize:"22px",cursor:"pointer",padding:"0 4px",lineHeight:1,fontFamily:"inherit"}}>×</button>
+      </div>
+      <div style={{padding:"16px",fontSize:"13px",lineHeight:1.55,color:"#333"}}>
+        {children}
+      </div>
+      <div style={{padding:"0 16px 16px"}}>
+        <button onClick={onClose} style={{...T.pb,width:"100%"}}>Ho capito, gioca!</button>
+      </div>
+    </div>
+  </div>);
+}
+function HelpButton({onClick}){
+  return(<button onClick={onClick} style={{background:"none",border:"1.5px solid #444",borderRadius:"50%",width:"26px",height:"26px",color:"#aaa",fontSize:"13px",cursor:"pointer",fontFamily:"inherit",display:"inline-flex",alignItems:"center",justifyContent:"center",marginRight:"6px",fontWeight:"700"}} title="Come si gioca" onMouseEnter={e=>{e.currentTarget.style.color="#fff";e.currentTarget.style.borderColor="#fff";}} onMouseLeave={e=>{e.currentTarget.style.color="#aaa";e.currentTarget.style.borderColor="#444";}}>?</button>);
+}
+
+// ── TUTORIALS ────────────────────────────────────────────────────────────
+const TUTORIALS={
+  ciclodle:{title:"🚴 Ciclodle",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> indovina il corridore misterioso in <strong>6 tentativi</strong>.</p>
+    <p>Ogni volta che inserisci un corridore, vedrai 6 caselle colorate che ti dicono quanto è vicino:</p>
+    <ul style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li><span style={{background:"#16a34a",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Verde</span> = esatto</li>
+      <li><span style={{background:"#d97706",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Giallo</span> = vicino (età ±3, punti ±500, rank ±10)</li>
+      <li><span style={{background:"#dc2626",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Rosso</span> = diverso</li>
+      <li>Le frecce <strong>▲▼</strong> indicano se il valore reale è più alto/basso</li>
+    </ul>
+    <p>Le colonne sono: <strong>Team, Nazione, Continente, Età, Punti UCI, Rank UCI</strong>.</p>
+    <p>Puoi usare <strong>💡 Indizio</strong> per svelare gratis una colonna.</p>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>Pool: Top 100 UCI 2025</p>
+  </>)},
+  wordle:{title:"🔤 Wordle Cognome",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> indovina il <strong>cognome</strong> del corridore in 6 tentativi.</p>
+    <p>Il cognome ha una lunghezza fissa (tra 4 e 8 lettere). Per ogni lettera:</p>
+    <ul style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li><span style={{background:"#22c55e",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Verde</span> = lettera giusta nel posto giusto</li>
+      <li><span style={{background:"#eab308",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Giallo</span> = lettera giusta in posto sbagliato</li>
+      <li><span style={{background:"#6b7280",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Grigio</span> = lettera non presente</li>
+    </ul>
+    <p>Premi <strong>💡 Indizio</strong> per vedere nazione, team e rank UCI del corridore.</p>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>Pool: Top 100 UCI 2025</p>
+  </>)},
+  hangman:{title:"💀 Impiccato",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> scopri il <strong>cognome</strong> prima che il pupazzo sia completato.</p>
+    <p>Hai <strong>7 errori</strong> a disposizione. Ogni errore aggiunge un pezzo al pupazzo (testa, corpo, braccia, gambe).</p>
+    <p>Le lettere corrette diventano <span style={{color:"#22c55e",fontWeight:"700"}}>verdi</span>, quelle sbagliate <span style={{color:"#ef4444",fontWeight:"700"}}>rosse</span>.</p>
+    <p>Premi <strong>💡 Indizio</strong> per vedere nazione, team e rank UCI del corridore.</p>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>Pool: Top 100 UCI 2025</p>
+  </>)},
+  higherlower:{title:"⚖ Chi ha più punti UCI",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> scegli il corridore con <strong>più punti UCI 2025</strong>.</p>
+    <p>A sinistra vedi il punteggio del corridore base. A destra lo sfidante, con il punteggio nascosto.</p>
+    <p>Se indovini, lo sfidante diventa la nuova base e arriva un nuovo corridore. Se sbagli, la streak si azzera.</p>
+    <ul style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li>🟰 Parità = punto valido</li>
+      <li>🎉 Confetti ogni 5 risposte consecutive</li>
+      <li>🏆 Il tuo record viene salvato localmente</li>
+    </ul>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>Pool: Top 100 UCI 2025 • Streak infinita</p>
+  </>)},
+  carriera:{title:"🏆 Indovina la Carriera",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> indovina il ciclista dalla sua carriera professionistica.</p>
+    <p>Vengono mostrati <strong>team, periodo e giorni di gara</strong>. Più indizi sblocchi, meno punti ottieni.</p>
+    <ul style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li>Indovina al 1° tentativo = punti massimi</li>
+      <li>Ogni errore sblocca un indizio in più automaticamente</li>
+      <li>Puoi anche premere <strong>💡</strong> per sbloccarli tu</li>
+      <li>Clicca <strong>💡 nota</strong> su un team per un extra</li>
+    </ul>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>22 carriere curate: da Merckx a Pogačar</p>
+  </>)},
+  lista:{title:"⏱ Sfida a Tempo",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> in <strong>90 secondi</strong> trova più nomi possibili della categoria di oggi.</p>
+    <p>Categorie in rotazione: vincitori Tour/Giro/Vuelta, Monumento, campioni del Mondo, maglie del Tour, specialità…</p>
+    <ul style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li>Scrivi un nome e premi <strong>Invio</strong></li>
+      <li>Ogni risposta corretta = <strong>+5 secondi</strong> bonus ⏱</li>
+      <li>Piccoli refusi sono accettati (fuzzy match)</li>
+    </ul>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>12 categorie diverse</p>
+  </>)},
+  salita:{title:"🏔 Indovina la Salita",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> riconosci la salita leggendaria dai dati tecnici.</p>
+    <p>Gli indizi si sbloccano uno alla volta:</p>
+    <ol style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li>Lunghezza in km</li>
+      <li>Pendenza media in %</li>
+      <li>Quota finale in metri</li>
+      <li>Nazione + descrizione</li>
+    </ol>
+    <p>Al 1° tentativo: 4 punti. All'ultimo: 1 punto.</p>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>15 salite iconiche di Tour, Giro e Vuelta</p>
+  </>)},
+  timeline:{title:"🔀 Timeline",body:(<>
+    <p style={{marginTop:0}}><strong>Obiettivo:</strong> ordina <strong>4 eventi storici</strong> dal più vecchio al più recente.</p>
+    <p>Usa i tasti <strong>▲▼</strong> per muovere gli eventi. Quando sei sicuro, premi <strong>Verifica ordine</strong>.</p>
+    <ul style={{paddingLeft:"18px",marginBottom:"10px"}}>
+      <li><span style={{background:"#16a34a",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Verde</span> = posizione corretta</li>
+      <li><span style={{background:"#dc2626",color:"#fff",padding:"1px 6px",borderRadius:"3px",fontSize:"11px",fontWeight:"700"}}>Rosso</span> = posizione sbagliata</li>
+    </ul>
+    <p>Un solo tentativo: poi viene rivelato l'anno esatto di ogni evento.</p>
+    <p style={{color:"#888",fontSize:"11px",marginBottom:0}}>10 timeline storiche</p>
+  </>)},
+};
+
 function DoneScreen({gameKey,day,isToday,onHome,onArchive,children}){
   const saved=isToday?loadResult(gameKey):null;
   if(saved)return(
@@ -1030,7 +1144,7 @@ function DoneScreen({gameKey,day,isToday,onHome,onArchive,children}){
   return null;
 }
 
-function Hdr({title,sub,onHome,archiveNav,countdown}){
+function Hdr({title,sub,onHome,archiveNav,countdown,onHelp}){
   return(
     <div style={T.hdr}>
       <div style={{flex:1,minWidth:0}}>
@@ -1047,6 +1161,7 @@ function Hdr({title,sub,onHome,archiveNav,countdown}){
         </div>
         <button onClick={archiveNav.next} disabled={archiveNav.day>=archiveNav.max} style={{...T.bk,padding:"5px 10px",fontSize:"12px",opacity:archiveNav.day>=archiveNav.max?0.3:1}}>▶</button>
       </div>}
+      {onHelp&&<HelpButton onClick={onHelp}/>}
       {onHome&&<button style={T.bk} onClick={onHome} onMouseEnter={e=>{e.currentTarget.style.color="#fff";e.currentTarget.style.borderColor="#fff";}} onMouseLeave={e=>{e.currentTarget.style.color="#aaa";e.currentTarget.style.borderColor="#444";}}>← Home</button>}
     </div>
   );
@@ -1141,6 +1256,7 @@ function CiclodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const savedToday=isToday?loadResult("ciclodle"):null;
   const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState([]);const[hintUsed,setHintUsed]=useState(false);
   const[hintCol,setHintCol]=useState(null);
+  const[showHelp,setShowHelp]=useState(false);
   useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows([]);setHintUsed(false);setHintCol(null);},[seed]);
   function useHint(){
     if(hintUsed||ov)return;
@@ -1161,7 +1277,8 @@ function CiclodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     else if(o){sO(true);if(isToday){saveResult("ciclodle",{won:false,attempts:6});saveStats("ciclodle",false);}setTimeout(()=>sMo(true),COLS.length*120+600);}
   }
 
-  if(savedToday)return(<div style={T.app}><Hdr title="Ciclodle" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="ciclodle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday)return(<div style={T.app}><Hdr title="Ciclodle" sub={`🗓 Giornaliero • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="ciclodle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.ciclodle.title}>{TUTORIALS.ciclodle.body}</HelpModal>
     <div style={{fontSize:"40px",marginBottom:"4px"}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
     <div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{target.name}</div>
@@ -1176,7 +1293,7 @@ function CiclodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     </div>
     <ShareButton text={`🚴 Ciclodle #${day}\n${s.won?"Trovato in "+s.attempts+"/6":"Non trovato"}\nquiz-ciclismo.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}><Hdr title="Ciclodle" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}><Hdr title="Ciclodle" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{display:"flex",gap:"4px",padding:"6px 12px",background:"#f8f8f6",borderBottom:`1px solid ${US.border}`,justifyContent:"center",flexWrap:"wrap"}}>
       {[["🟩","Esatto"],["🟨","Simile"],["🟥","Diverso"],["↑↓","Più alto/basso"]].map(([ic,lb])=>(
         <div key={lb} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"10px",color:US.muted}}>
@@ -1267,7 +1384,7 @@ function WordleFlipCell({letter,color,colIdx,cellSize=52,cellFont=22}){
 }
 function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const MAX_ATT=6;
-  const pool=useMemo(()=>{const daily=shuffle([...DB_TOP100],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8).slice(1);},[seed]);
+  const pool=useMemo(()=>{const daily=shuffle([...DB_TOP100],seedRandom(seed));return daily.filter(p=>{const n=normStr(p.surname);return /^[A-Z]+$/.test(n)&&n.length>=4&&n.length<=8;}).slice(1);},[seed]);
   const rider=pool[0]||DB_TOP100[0];
   const word=normStr(rider.surname);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -1303,7 +1420,9 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const colBg={green:"#22c55e",yellow:"#eab308",gray:"#6b7280"};
 
   const[hint,setHint]=useState(false);
-  if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  const[showHelp,setShowHelp]=useState(false);
+  if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.wordle.title}>{TUTORIALS.wordle.body}</HelpModal>
     <div style={{fontSize:"40px",marginBottom:"4px"}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
     <div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{word}</div>
@@ -1318,7 +1437,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     </div>
     <ShareButton text={`🔤 Wordle #${day}\n${s.won?"Trovato in "+s.attempts+"/6":"Non trovato"}\n${word}\nquiz-ciclismo.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}>{showConfetti&&<Confetti active={showConfetti}/>}<Hdr title="Wordle Cognome" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{showConfetti&&<Confetti active={showConfetti}/>}<Hdr title="Wordle Cognome" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <div style={{display:"flex",gap:"10px",alignItems:"center"}}><span style={{fontSize:"11px",color:"#888",fontWeight:"600"}}>{word.length} lettere</span><span style={{fontSize:"11px",color:attempts.length>0?US.orange:"#aaa",fontWeight:"700"}}>{attempts.length}/{MAX_ATT}</span></div>
@@ -1365,7 +1484,7 @@ function WordleCognome({onHome,isDaily,onArchive}){
 // ── IMPICCATO ────────────────────────────────────────────────────────────
 function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const M=7;
-  const pool=useMemo(()=>{const daily=shuffle([...DB_TOP100],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4).slice(2);},[seed]);
+  const pool=useMemo(()=>{const daily=shuffle([...DB_TOP100],seedRandom(seed));return daily.filter(p=>{const n=normStr(p.surname);return /^[A-Z]+$/.test(n)&&n.length>=4;}).slice(2);},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("hangman"):null;
   const[gu,sGu]=useState(new Set());const[st,sSt]=useState("p");
@@ -1378,14 +1497,16 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const fc=isAlive?"#eff6ff":"#fef2f2";
 
   const[hint,setHint]=useState(false);const[hgConfetti,setHgConfetti]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
   useEffect(()=>{if(st==="w"&&!hgConfetti)setTimeout(()=>setHgConfetti(true),500);},[st]);
-  if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.hangman.title}>{TUTORIALS.hangman.body}</HelpModal>
     <div style={{fontSize:"40px",marginBottom:"6px"}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"4px"}}>{s.won?"Trovato!":"Non trovato"}</div>
     <div style={{fontSize:"18px",fontWeight:"800",letterSpacing:"4px",color:US.black,marginBottom:"6px"}}>{s.word}</div>
     <ShareButton text={`🪢 Impiccato #${day}\n${s.won?"Trovato":"Non trovato"}: ${s.word}\n${s.errors||0} errori\nquiz-ciclismo.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}>{hgConfetti&&<Confetti active={hgConfetti}/>}<Hdr title="Impiccato" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{hgConfetti&&<Confetti active={hgConfetti}/>}<Hdr title="Impiccato" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",justifyContent:"flex-end",marginBottom:"6px"}}>
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
@@ -1433,6 +1554,7 @@ function HigherOrLowerGame({onHome}){
   const[done,setDone]=useState(false);
   const[round,setRound]=useState(1);
   const[confetti,setConfetti]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
 
   const tied=base.uciPts===challenger.uciPts;
   const winner=base.uciPts>=challenger.uciPts?'base':'challenger';
@@ -1469,7 +1591,8 @@ function HigherOrLowerGame({onHome}){
   if(done)return(
     <div style={T.app}>
       {confetti&&<Confetti active={confetti}/>}
-      <Hdr title="Chi ha più punti UCI" onHome={onHome}/>
+      <Hdr title="Chi ha più punti UCI" onHelp={()=>setShowHelp(true)} onHome={onHome}/>
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.higherlower.title}>{TUTORIALS.higherlower.body}</HelpModal>
       <div style={{...T.body,textAlign:"center",paddingTop:"28px"}} className="pop-in">
         <div style={{fontSize:"52px",marginBottom:"8px"}}>😔</div>
         <div style={{fontSize:"22px",fontWeight:"800",color:US.black,marginBottom:"4px"}}>Streak: {streak}</div>
@@ -1496,7 +1619,7 @@ function HigherOrLowerGame({onHome}){
   return(
     <div style={T.app}>
       {confetti&&<Confetti active={confetti}/>}
-      <Hdr title="Chi ha più punti UCI" sub={`⚖ Confronto #${round}`} onHome={onHome}/>
+      <Hdr title="Chi ha più punti UCI" sub={`⚖ Confronto #${round}`} onHelp={()=>setShowHelp(true)} onHome={onHome}/>
       <div style={{...T.body,maxWidth:"460px"}}>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"16px"}}>
           <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
@@ -1567,6 +1690,7 @@ function CarrieraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const savedToday=isToday?loadResult("carriera"):null;
   const maxC=rider.clues.length;
   const[rev,sRev]=useState(1);const[gu,sGu]=useState("");const[st,sSt]=useState("p");const[sc,sSc]=useState(0);const[fin,sFin]=useState(false);const[shownNotes,sShownNotes]=useState(new Set());const[carConf,setCarConf]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
   useEffect(()=>{sRev(1);sGu("");sSt("p");sSc(0);sFin(false);sShownNotes(new Set());},[seed]);
   const pts=Math.max(1,maxC+1-rev);
   function sub(){
@@ -1576,9 +1700,10 @@ function CarrieraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     else{if(rev<maxC){sRev(x=>x+1);sSt("w");setTimeout(()=>sSt("p"),900);}else sSt("r");}
     sGu("");
   }
-  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{carConf&&<Confetti active={carConf}/>}<Hdr title="Indovina la Carriera" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="carriera" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>🏆</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.score} punti</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${s.score} punti\nquiz-ciclismo.vercel.app`}/></>}</DoneScreen></div>);
-  if(fin)return(<div style={{...T.app,position:"relative"}} className="pop-in">{carConf&&<Confetti active={carConf}/>}<Hdr title="Indovina la Carriera" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}</div><div style={{fontSize:"12px",color:"#888",marginBottom:"18px"}}>punti totali</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${sc} punti\nquiz-ciclismo.vercel.app`}/>{!isToday&&archiveNav&&archiveNav.day<archiveNav.max&&<button onClick={archiveNav.next} style={{...T.pb,width:"100%",marginBottom:"6px"}}>→ Prossima sfida</button>}{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div></div>);
-  return(<div style={T.app}><Hdr title="Indovina la Carriera" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{carConf&&<Confetti active={carConf}/>}<Hdr title="Indovina la Carriera" sub="🗓 Giornaliero" onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="carriera" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>🏆</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.score} punti</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${s.score} punti\nquiz-ciclismo.vercel.app`}/></>}</DoneScreen></div>);
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.carriera.title}>{TUTORIALS.carriera.body}</HelpModal>
+  if(fin)return(<div style={{...T.app,position:"relative"}} className="pop-in">{carConf&&<Confetti active={carConf}/>}<Hdr title="Indovina la Carriera" onHelp={()=>setShowHelp(true)} onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}</div><div style={{fontSize:"12px",color:"#888",marginBottom:"18px"}}>punti totali</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${sc} punti\nquiz-ciclismo.vercel.app`}/>{!isToday&&archiveNav&&archiveNav.day<archiveNav.max&&<button onClick={archiveNav.next} style={{...T.pb,width:"100%",marginBottom:"6px"}}>→ Prossima sfida</button>}{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div></div>);
+  return(<div style={T.app}><Hdr title="Indovina la Carriera" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <div style={{fontSize:"11px",color:"#888"}}>{st==="p"&&<>Vale <strong style={{color:US.black}}>{pts} punt{pts===1?"o":"i"}</strong></>}</div>
@@ -1631,6 +1756,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const[lastFound,setLastFound]=useState(null);
   const[done,setDone]=useState(false);
   const[listaConf,setListaConf]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
   const inputRef=useRef(null);
   const timerRef=useRef(null);
   useEffect(()=>{setInput("");setFound([]);setWrong(null);setSeconds(TOTAL);setLastFound(null);setDone(false);},[seed]);
@@ -1656,14 +1782,15 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   }
   const total=validAnswers.length;
   const pct=Math.round(found.length/total*100);
-  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{listaConf&&<Confetti active={listaConf}/>}<Hdr title="Sfida a Tempo" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
+  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{listaConf&&<Confetti active={listaConf}/>}<Hdr title="Sfida a Tempo" sub="🗓 Giornaliero" onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.lista.title}>{TUTORIALS.lista.body}</HelpModal>
     const fn=s.foundNames||[];const all=s.allNames||[];const ms=all.filter(p=>!fn.includes(p));
     return (<><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>📋</div><div style={{fontSize:"13px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.title}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div>{fn.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"5px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{fn.map(p=>(<div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}{ms.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"5px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{ms.map(p=>(<div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}<ShareButton text={`📋 Lista Quiz #${day}\n${s.title}\n${s.found}/${s.total} trovati\nquiz-ciclismo.vercel.app`}/></>);
   }}</DoneScreen></div>);
   if(done){
     const missed=validAnswers.filter(p=>!found.includes(p));
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
-    return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
       <div style={T.body}>
         <div style={{marginBottom:"14px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
           <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria</div>
@@ -1684,7 +1811,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
     </div>);
   }
-  return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       <div style={{marginBottom:"12px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
         <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria di oggi</div>
@@ -1726,6 +1853,7 @@ function SalitaGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const[st,setSt]=useState("p");
   const[fin,setFin]=useState(false);
   const[confRev,setConfRev]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
   const maxC=4;
   useEffect(()=>{setRev(1);setGu("");setSt("p");setFin(false);setConfRev(false);},[seed]);
   const pts=Math.max(1,maxC+1-rev);
@@ -1743,13 +1871,14 @@ function SalitaGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     else{if(rev<maxC){setRev(x=>x+1);setSt("w");setTimeout(()=>setSt("p"),900);}else setSt("r");}
     setGu("");
   }
-  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{confRev&&<Confetti active={confRev}/>}<Hdr title="Indovina la Salita" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="salita" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{confRev&&<Confetti active={confRev}/>}<Hdr title="Indovina la Salita" sub="🗓 Giornaliero" onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="salita" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.salita.title}>{TUTORIALS.salita.body}</HelpModal>
     <div style={{fontSize:"48px",marginBottom:"4px"}}>🏔</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"2px"}}>{s.won?`${s.score} punti`:"Non trovata"}</div>
     <div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{salita.answer}</div>
     <ShareButton text={`🏔 Indovina la Salita #${day}\n${s.won?s.score+" punti":"Non trovata"}\nquiz-ciclismo.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}>{confRev&&<Confetti active={confRev}/>}<Hdr title="Indovina la Salita" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{confRev&&<Confetti active={confRev}/>}<Hdr title="Indovina la Salita" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <div style={{fontSize:"11px",color:"#888"}}>{st==="p"&&<>Vale <strong style={{color:US.black}}>{pts} punt{pts===1?"o":"i"}</strong></>}</div>
@@ -1785,6 +1914,7 @@ function TimelineGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const[order,setOrder]=useState(()=>shuffle([...puzzle.events],seedRandom(seed)));
   const[submitted,setSubmitted]=useState(false);
   const[timelineConf,setTimelineConf]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
   useEffect(()=>{setOrder(shuffle([...puzzle.events],seedRandom(seed)));setSubmitted(false);setTimelineConf(false);},[seed]);
 
   function moveUp(i){if(i<=0)return;const n=[...order];[n[i-1],n[i]]=[n[i],n[i-1]];setOrder(n);}
@@ -1798,7 +1928,8 @@ function TimelineGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     if(allCorrect)setTimeout(()=>setTimelineConf(true),400);
   }
 
-  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{timelineConf&&<Confetti active={timelineConf}/>}<Hdr title="Timeline" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="timeline" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{timelineConf&&<Confetti active={timelineConf}/>}<Hdr title="Timeline" sub="🗓 Giornaliero" onHelp={()=>setShowHelp(true)} onHome={onHome}/><DoneScreen gameKey="timeline" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+    <HelpModal open={showHelp} onClose={()=>setShowHelp(false)} title={TUTORIALS.timeline.title}>{TUTORIALS.timeline.body}</HelpModal>
     <div style={{fontSize:"48px",marginBottom:"4px"}}>🔀</div>
     <div style={{fontSize:"13px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.title}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:s.won?US.green:US.red,marginBottom:"10px"}}>{s.correct}/{s.total} in ordine corretto</div>
@@ -1808,7 +1939,7 @@ function TimelineGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const correctCount=submitted?order.filter((e,i)=>e.label===correctOrder[i].label).length:0;
   const allOk=submitted&&correctCount===order.length;
 
-  return(<div style={{...T.app,position:"relative"}}>{timelineConf&&<Confetti active={timelineConf}/>}<Hdr title="Timeline" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{timelineConf&&<Confetti active={timelineConf}/>}<Hdr title="Timeline" sub={`${label} • #${day}`} onHelp={()=>setShowHelp(true)} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
       <div style={{marginBottom:"12px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
         <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Sfida di oggi</div>
@@ -1857,7 +1988,7 @@ function Timeline({onHome,isDaily,onArchive}){
 }
 // ── HOME ──────────────────────────────────────────────────────────────────
 const MODES=[
-  {key:"ciclodle",   label:"Ciclodle",                 icon:"🚴", desc:"Indovina il corridore in 6 tentativi. Ogni risposta rivela indizi.", badge:"97 top 100 UCI",  accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
+  {key:"ciclodle",   label:"Ciclodle",                 icon:"🚴", desc:"Indovina il corridore in 6 tentativi. Ogni risposta rivela indizi.", badge:"Top 100 UCI",    accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
   {key:"wordle",     label:"Wordle Cognome",           icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.",            badge:"Top 100 UCI",    accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
   {key:"hangman",    label:"Impiccato",                icon:"💀", desc:"Scopri il cognome prima che il pupazzo sia completato. 7 errori.",   badge:"Top 100 UCI",    accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
   {key:"carriera",   label:"Indovina la Carriera",     icon:"🏆", desc:"Indovina il corridore dalla sua carriera di team e periodi.",        badge:"22 corridori",   accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
