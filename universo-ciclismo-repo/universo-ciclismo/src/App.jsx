@@ -1227,7 +1227,7 @@ function eC(k,g,t){
   if(k==="uciRank"){const d=Math.abs(g-t);return d===0?"green":d<=10?"yellow":"red";}
   return g===t?"green":"red";
 }
-function aD(k,g,t){if(k!=="age"&&k!=="uciPts"&&k!=="uciRank")return null;return g===t?null:g<t?"▲":"▼";}
+function aD(k,g,t){if(k!=="age"&&k!=="uciPts"&&k!=="uciRank")return null;if(g===t)return null;if(k==="uciRank")return g<t?"▼":"▲";return g<t?"▲":"▼";}
 
 function CiclodleFlipCell({value,arrow,color,flipped,colIdx}){
   const delay=colIdx*250;
@@ -1237,12 +1237,12 @@ function CiclodleFlipCell({value,arrow,color,flipped,colIdx}){
   useEffect(()=>{setIsFlipped(false);},[value,color]);
   useEffect(()=>{if(flipped){const t=setTimeout(()=>setIsFlipped(true),delay);return()=>clearTimeout(t);}},[flipped]);
   return(
-    <div style={{flex:1,minWidth:0,height:"46px",perspective:"400px"}}>
+    <div style={{flex:1,minWidth:0,height:"50px",perspective:"400px"}}>
       <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 1.4s ease`,transform:isFlipped?"rotateX(180deg)":"rotateX(0deg)"}}>
         <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"4px"}}/>
-        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"4px",border:color!=="empty"&&color!=="active"?`2.5px solid ${borderCol}`:"none",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden",boxSizing:"border-box"}}>
-          <span style={{fontWeight:"800",fontSize:"9px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 3px",letterSpacing:"0.2px"}}>{value}</span>
-          {arrow&&<span style={{fontSize:"8px",color:"rgba(255,255,255,0.9)",fontWeight:"700"}}>{arrow}</span>}
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"4px",border:color!=="empty"&&color!=="active"?`2.5px solid ${borderCol}`:"none",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",boxSizing:"border-box",padding:"2px 2px"}}>
+          <span style={{fontWeight:"800",fontSize:"9px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px",letterSpacing:"0.2px"}}>{value}</span>
+          {arrow&&<span style={{fontSize:"12px",color:"#fff",fontWeight:"900",lineHeight:1,marginTop:"1px",textShadow:"0 1px 2px rgba(0,0,0,0.3)"}}>{arrow}</span>}
         </div>
       </div>
     </div>
